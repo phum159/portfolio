@@ -70,7 +70,10 @@ export default async function ProjectPage({
           alt=""
           width={1600}
           height={900}
-          className="mb-10 w-full rounded-lg border border-line object-cover"
+          /* Photos come in both orientations, so bound the height and let
+             the width follow rather than forcing a fixed aspect ratio --
+             a portrait shot in a 16:9 box is either a sliver or a tower. */
+          className="mx-auto mb-10 max-h-[30rem] w-auto max-w-full rounded-lg border border-line"
           priority
         />
       )}
@@ -140,7 +143,7 @@ export default async function ProjectPage({
                   alt={shot.caption ? pick(shot.caption, locale) : ""}
                   width={800}
                   height={600}
-                  className="w-full rounded-lg border border-line object-cover"
+                  className="mx-auto max-h-96 w-auto max-w-full rounded-lg border border-line"
                 />
                 {shot.caption && (
                   <figcaption className="mt-2 text-xs text-muted">
