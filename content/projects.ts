@@ -27,7 +27,7 @@ export const projects: Project[] = [
       th: "ระบบบ้านอัจฉริยะที่ทำเองทั้งสาย ตั้งแต่เฟิร์มแวร์อ่านเซนเซอร์บน STM32 ส่งต่อให้ ESP32 เป็นเกตเวย์ MQTT ไปจนถึง Home Assistant และฐานข้อมูลที่รันบนเซิร์ฟเวอร์ของตัวเอง",
       en: "An end-to-end smart home: STM32 firmware reading the sensors, an ESP32 acting as a pure MQTT gateway, and Home Assistant plus a database on a server I run myself.",
     },
-    year: 2025,
+    year: 2026,
     role: {
       th: "ทำคนเดียวทั้งหมด — ออกแบบวงจร เขียนเฟิร์มแวร์ และวางระบบฝั่งเซิร์ฟเวอร์",
       en: "Solo project — circuit design, firmware, and the server side.",
@@ -142,7 +142,7 @@ export const projects: Project[] = [
       th: "เครื่องวัดส่วนสูงอัตโนมัติด้วยคลื่นอัลตราโซนิกและ ESP32 แทนการวัดด้วยไม้วัดที่ต้องอ่านค่าด้วยสายตา วัดเสร็จในเวลาเฉลี่ย 7.7 วินาที คลาดเคลื่อนเฉลี่ย 0.59 เซนติเมตร",
       en: "An ultrasonic height meter built on an ESP32, replacing a ruler that someone has to read by eye. A measurement takes 7.7 seconds on average, with a mean error of 0.59 cm.",
     },
-    year: 2026,
+    year: 2025,
     role: {
       th: "งานกลุ่ม — ผมรับผิดชอบการเขียนเฟิร์มแวร์ทั้งหมด และวางแผนว่าทั้งฮาร์ดแวร์และซอฟต์แวร์จะทำอะไรอย่างไร",
       en: "Team project — I owned the firmware, and planned how both the hardware and the software would work.",
