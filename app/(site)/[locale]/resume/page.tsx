@@ -4,6 +4,7 @@ import Section, { PageHeader } from "@/components/ui/Section";
 import Timeline from "@/components/ui/Timeline";
 import { profile, resumeByKind } from "@/content";
 import { isLocale, pick, t } from "@/lib/i18n";
+import { withBasePath } from "@/lib/site";
 
 export async function generateMetadata({
   params,
@@ -29,7 +30,7 @@ export default async function ResumePage({ params }: PageProps<"/[locale]/resume
 
       {profile.resume && (
         <a
-          href={pick(profile.resume, locale)}
+          href={withBasePath(pick(profile.resume, locale))}
           download
           className="mb-10 inline-block rounded bg-accent px-4 py-2 text-sm text-accent-contrast"
         >

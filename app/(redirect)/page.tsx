@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect } from "react";
 import { defaultLocale, isLocale, localeLabel, locales } from "@/lib/i18n";
+import { withBasePath } from "@/lib/site";
 
 /**
  * "/" is not a real page — it just forwards to /th or /en.
@@ -29,7 +30,7 @@ export default function RootRedirect() {
       if (navigator.language.toLowerCase().startsWith("en")) target = "en";
     }
 
-    window.location.replace(`/${target}/`);
+    window.location.replace(withBasePath(`/${target}/`));
   }, []);
 
   return (
