@@ -6,7 +6,6 @@ import { fontVariables } from "@/components/layout/Fonts";
 import { profile } from "@/content";
 import { isLocale, locales, pick } from "@/lib/i18n";
 import { site } from "@/lib/site";
-import { themeInitScript } from "@/lib/theme";
 import "../../globals.css";
 
 /**
@@ -44,10 +43,6 @@ export default async function SiteLayout({ children, params }: LayoutProps<"/[lo
 
   return (
     <html lang={locale} className={`${fontVariables} h-full antialiased`}>
-      <head>
-        {/* Applies the saved theme before first paint so there is no flash. */}
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-      </head>
       <body className="min-h-full flex flex-col">
         <Nav locale={locale} />
         <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-10">{children}</main>

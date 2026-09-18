@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import LocaleSwitch from "./LocaleSwitch";
-import ThemeToggle from "./ThemeToggle";
 import { localePath, t, type Locale, type StringKey } from "@/lib/i18n";
 
 /**
@@ -58,7 +57,6 @@ export default function Nav({ locale }: { locale: Locale }) {
 
         <div className="ml-auto flex items-center gap-3 md:ml-0">
           <LocaleSwitch locale={locale} />
-          <ThemeToggle />
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}

@@ -61,12 +61,15 @@ const strings = {
 
   "home.featured": { th: "โปรเจกต์เด่น", en: "Featured projects" },
   "home.viewAll": { th: "ดูโปรเจกต์ทั้งหมด", en: "View all projects" },
-  "home.skillsPeek": { th: "ทำงานกับอะไรได้บ้าง", en: "What I work with" },
+  "home.skillsPeek": { th: "ทักษะเด่นบนโต๊ะแล็บ", en: "Lab Bench Highlights" },
+  "home.status": { th: "สถานะ: พร้อมเริ่มฝึกงาน ปี 2026", en: "STATUS: READY FOR 2026 INTERNSHIP" },
+  "home.heroSubtitle": { th: "ออกแบบฮาร์ดแวร์ เขียนเฟิร์มแวร์ระดับต่ำ และเชื่อมต่อระบบ IoT จริง", en: "Hardware design, low-level firmware, and end-to-end IoT connectivity." },
+  "home.resumeCta": { th: "ดูประวัติการทำงาน", en: "View Resume" },
 
   "projects.title": { th: "โปรเจกต์", en: "Projects" },
   "projects.intro": {
-    th: "งานที่ลงมือทำเอง ตั้งแต่เฟิร์มแวร์บนบอร์ดจนถึงระบบฝั่งเซิร์ฟเวอร์",
-    en: "Things I built myself, from firmware on the board up to the server side.",
+    th: "โปรเจกต์ที่ลงมือทำเองหรือมีส่วนร่วมในด้านต่าง ๆ",
+    en: "Projects I've built myself or contributed to, across different areas.",
   },
   "projects.all": { th: "ทั้งหมด", en: "All" },
   "projects.empty": { th: "ยังไม่มีโปรเจกต์ในหมวดนี้", en: "No projects with this tag yet." },

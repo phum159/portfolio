@@ -2,44 +2,35 @@
 
 /*
  * ───────────────────────────────────────────────────────────────
- *  DESIGN TOKENS
+ *  DESIGN TOKENS — "SSD1306" OLED theme
+ *
+ *  The look is a monochrome OLED display panel: pitch black, cyan
+ *  phosphor, amber for secondary accents, and a faint pixel grid.
+ *  Black is a true #000000 on purpose — that is what an OLED panel does
+ *  with an unlit pixel, and it is what makes the cyan glow read.
+ *
  *  This is the one place to change the look of the whole site.
- *  Components use semantic Tailwind classes (bg-surface, text-muted,
- *  border-line, text-accent…) — not raw colours — so restyling the
- *  site means editing the values below, not hunting through JSX.
+ *  Components use semantic classes (bg-surface, text-muted,
+ *  border-line, text-accent…), never raw colours.
+ *
+ *  Dark only — there is no light variant, so do not add
+ *  prefers-color-scheme blocks or a [data-theme] switch.
  * ───────────────────────────────────────────────────────────────
  */
 
 :root {
-  --background: #ffffff;
-  --foreground: #14181d;
-  --surface: #f6f7f9;
-  --muted: #5d6673;
-  --line: #e2e5ea;
-  --accent: #0d7a5f;
-  --accent-contrast: #ffffff;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --background: #0b0d10;
-    --foreground: #e8ebef;
-    --surface: #14181d;
-    --muted: #93a0b0;
-    --line: #242b33;
-    --accent: #3ddc97;
-    --accent-contrast: #07110d;
-  }
-}
-
-:root[data-theme="dark"] {
-  --background: #0b0d10;
-  --foreground: #e8ebef;
-  --surface: #14181d;
-  --muted: #93a0b0;
-  --line: #242b33;
-  --accent: #3ddc97;
-  --accent-contrast: #07110d;
+  --background: #000000;
+  --foreground: #e0f2fe;
+  /* Panel/card fill. Barely lifted off black so borders do the work. */
+  --surface: #060c18;
+  --muted: #7295b5;
+  --line: #0e243d;
+  /* Brighter border for the element the eye should land on. */
+  --line-strong: #1c4573;
+  --accent: #00e5ff;
+  --accent-contrast: #000000;
+  /* Secondary accent: status, warnings, "the yellow rows" of an SSD1306. */
+  --accent-alt: #facc15;
 }
 
 @theme inline {
@@ -48,21 +39,112 @@
   --color-surface: var(--surface);
   --color-muted: var(--muted);
   --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
   --color-accent: var(--accent);
   --color-accent-contrast: var(--accent-contrast);
+  --color-accent-alt: var(--accent-alt);
 
-  --font-sans: var(--font-sans);
+  /* Latin from Inter, Thai from IBM Plex Sans Thai — the browser picks
+     per glyph, so a mixed Thai/English sentence still looks right. */
+  --font-sans: var(--font-inter), var(--font-thai), system-ui, sans-serif;
   --font-mono: var(--font-mono);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  /* Inter carries Latin; Thai glyphs fall through to IBM Plex Sans Thai,
+     which is why both families are loaded in components/layout/Fonts.ts. */
+  font-family: var(--font-inter), var(--font-thai), system-ui, sans-serif;
+}
+
+/*
+ * Pixel-grid texture, fixed behind everything. Deliberately faint —
+ * it should register as a texture, not as a visible grid.
+ */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0, 229, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.025) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/*
+ * Scanlines over the whole viewport. Thai has tone marks and vowels
+ * stacked above and below the baseline, so this stays subtle on
+ * purpose — heavier lines start eating those marks.
+ */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.5;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.22) 0px,
+    rgba(0, 0, 0, 0.22) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+/* Anything that should sit above the grid texture. */
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::after {
+    display: none;
+  }
 }
 
 /* Keep keyboard focus visible everywhere; restyle here, not per component. */
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
+}
+
+::selection {
+  background: rgba(0, 229, 255, 0.2);
+  color: var(--accent);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/*
+ * Utilities the design layer can reach for. Kept here rather than
+ * inlined in components so the glow stays consistent site-wide.
+ */
+@utility glow-accent {
+  box-shadow: 0 0 16px rgba(0, 229, 255, 0.25);
+}
+
+@utility glow-accent-alt {
+  box-shadow: 0 0 16px rgba(250, 204, 21, 0.25);
+}
+
+@utility text-glow {
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
 }
