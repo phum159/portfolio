@@ -22,10 +22,12 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       <section className="relative overflow-hidden rounded-2xl border border-line bg-surface/50 p-6 sm:p-10 shadow-xs">
         <div className="absolute top-0 right-0 -mt-6 -mr-6 h-40 w-40 rounded-full bg-accent/5 blur-3xl pointer-events-none" />
         
-        <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 font-mono text-xs text-accent mb-6">
-          <span className="h-2 w-2 rounded-full bg-accent animate-pulse" />
-          {t(locale, "home.status")}
-        </div>
+        {profile.availability && (
+          <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 font-mono text-xs text-accent mb-6">
+            <span className="h-2 w-2 rounded-full bg-accent animate-pulse" />
+            {pick(profile.availability, locale)}
+          </div>
+        )}
 
         <p className="font-mono text-sm tracking-wider text-accent uppercase">
           {pick(profile.headline, locale)}
@@ -35,11 +37,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           {pick(profile.name, locale)}
         </h1>
 
-        <p className="mt-4 text-base font-mono text-muted">
-          {t(locale, "home.heroSubtitle")}
-        </p>
-
-        <p className="mt-3 max-w-2xl text-lg text-muted leading-relaxed">
+        <p className="mt-4 max-w-2xl text-lg text-muted leading-relaxed">
           {pick(profile.tagline, locale)}
         </p>
 
@@ -64,11 +62,15 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           </Link>
         </div>
 
-        {/* Hardware stack quick bar */}
+        {/*
+         * Hardware stack quick bar. Derived from content/skills.ts, never
+         * typed out here -- the hard-coded version had drifted and was
+         * claiming FreeRTOS, which is not a skill Phum has.
+         */}
         <div className="mt-10 pt-6 border-t border-line/60 flex flex-wrap items-center gap-2">
           <span className="font-mono text-xs text-muted mr-2">STACK:</span>
-          {["STM32", "ESP32", "I2C", "SPI", "UART", "MQTT", "FreeRTOS", "C / C++"].map((tech) => (
-            <Chip key={tech}>{tech}</Chip>
+          {topSkills.map((skill) => (
+            <Chip key={skill.name}>{skill.name}</Chip>
           ))}
         </div>
       </section>

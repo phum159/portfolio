@@ -4,17 +4,21 @@ import type { Profile } from "./types";
  * Who you are. Everything marked TODO is a placeholder — replace it.
  */
 export const profile: Profile = {
-  // TODO: เช็คสะกดอังกฤษให้ตรงกับพาสปอร์ต/เอกสารราชการ
-  name: { th: "ภัคภูมิ จันทวงค์", en: "Phakphum Chanthawong" },
+  name: { th: "ภัคภูมิ จันทวงค์", en: "Pakaphum Juntawong" },
 
   headline: {
-    th: "วิศวกรระบบสมองกลฝังตัว",
-    en: "Embedded Systems Engineer",
+    th: "นักศึกษาวิศวกรรมคอมพิวเตอร์",
+    en: "Computer Engineering Student",
+  },
+
+  availability: {
+    th: "พร้อมฝึกงาน ปี 2027",
+    en: "Available for a 2027 internship",
   },
 
   tagline: {
-    th: "ออกแบบและเขียนเฟิร์มแวร์บน STM32 และ ESP32 ต่อเซนเซอร์ผ่าน I2C/SPI/UART แล้วส่งข้อมูลขึ้นระบบ IoT จริงด้วย MQTT",
-    en: "I design and write firmware for STM32 and ESP32 — sensors over I2C/SPI/UART, data up to a real IoT stack over MQTT.",
+    th: "สนใจงานด้านระบบสมองกลฝังตัว เฟิร์มแวร์ และ IoT",
+    en: "Interested in embedded systems, firmware and IoT",
   },
 
   bio: {

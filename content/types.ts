@@ -134,8 +134,11 @@ export type ResumeKind = "education" | "experience" | "activity";
 
 export interface ResumeEntry {
   kind: ResumeKind;
-  /** Free text so "2023 – present" and "Jun 2025" both work. */
-  period: Localized;
+  /**
+   * Free text so "2023 – present" and "Jun 2025" both work.
+   * Optional: better to leave it off than to guess at a date.
+   */
+  period?: Localized;
   title: Localized;
   org: Localized;
   /** Bullet points describing what happened. */
@@ -172,8 +175,10 @@ export interface ContactLink {
 
 export interface Profile {
   name: Localized;
-  /** The job being applied for, e.g. "Embedded Systems Engineer". */
+  /** What he is right now, e.g. "Computer Engineering Student". */
   headline: Localized;
+  /** Availability, shown as a status pill, e.g. "ready for a 2027 internship". */
+  availability?: Localized;
   /** One sentence for the hero. */
   tagline: Localized;
   /** A few paragraphs for /about. */

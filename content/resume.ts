@@ -1,9 +1,10 @@
 import type { ResumeEntry } from "./types";
 
 /**
- * Timeline entries for /resume. Order does not matter here — the page
- * groups them by `kind` in the order education → experience → activity,
- * and a group with no entries is skipped entirely.
+ * Timeline entries for /resume. Order within a `kind` is the order they
+ * are listed here, so education runs newest first. The page groups by
+ * kind in the order education → experience → activity, and a group with
+ * no entries is skipped entirely.
  *
  * That is why there is no "experience" entry yet: an empty section reads
  * better than a section full of TODO. Add one the moment there is a real
@@ -21,11 +22,42 @@ export const resumeEntries: ResumeEntry[] = [
       th: "สถาบันวิศวกรรมศาสตร์และเทคโนโลยีอุตสาหกรรม มหาวิทยาลัยเทคโนโลยีมหานคร",
       en: "Faculty of Engineering and Industrial Technology, Mahanakorn University of Technology",
     },
-    // TODO: เพิ่มเกรดเฉลี่ยและรายวิชาที่เกี่ยวข้องถ้าอยากใส่ เช่น
-    // details: {
-    //   th: ["เกรดเฉลี่ย X.XX", "วิชาที่เกี่ยวข้อง: ..."],
-    //   en: ["GPA X.XX", "Relevant coursework: ..."],
-    // },
+    details: {
+      th: ["เกรดเฉลี่ย 4.00"],
+      en: ["GPA 4.00"],
+    },
+  },
+  {
+    kind: "education",
+    period: { th: "2565 – 2567", en: "2022 – 2024" },
+    title: {
+      th: "ประกาศนียบัตรวิชาชีพ (ปวช.) สาขาเทคนิคคอมพิวเตอร์",
+      en: "Vocational Certificate in Computer Technology",
+    },
+    org: {
+      th: "วิทยาลัยเทคนิคร้อยเอ็ด",
+      en: "Roi Et Technical College",
+    },
+    details: {
+      th: ["เกรดเฉลี่ย 3.87"],
+      en: ["GPA 3.87"],
+    },
+  },
+  {
+    kind: "education",
+    period: { th: "2562 – 2564", en: "2019 – 2021" },
+    title: {
+      th: "มัธยมศึกษาตอนต้น",
+      en: "Lower Secondary School",
+    },
+    org: {
+      th: "โรงเรียนเตรียมอุดมศึกษาพัฒนาการ ร้อยเอ็ด",
+      en: "Triam Udom Suksa Pattanakarn Roi Et School",
+    },
+    details: {
+      th: ["ห้องเรียนพิเศษ Gifted", "เกรดเฉลี่ย 3.91"],
+      en: ["Gifted programme", "GPA 3.91"],
+    },
   },
 
   /* ------------------------------------------------------------------

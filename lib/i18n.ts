@@ -62,9 +62,7 @@ const strings = {
   "home.featured": { th: "โปรเจกต์เด่น", en: "Featured projects" },
   "home.viewAll": { th: "ดูโปรเจกต์ทั้งหมด", en: "View all projects" },
   "home.skillsPeek": { th: "ทักษะเด่นบนโต๊ะแล็บ", en: "Lab Bench Highlights" },
-  "home.status": { th: "สถานะ: พร้อมเริ่มฝึกงาน ปี 2026", en: "STATUS: READY FOR 2026 INTERNSHIP" },
-  "home.heroSubtitle": { th: "ออกแบบฮาร์ดแวร์ เขียนเฟิร์มแวร์ระดับต่ำ และเชื่อมต่อระบบ IoT จริง", en: "Hardware design, low-level firmware, and end-to-end IoT connectivity." },
-  "home.resumeCta": { th: "ดูประวัติการทำงาน", en: "View Resume" },
+  "home.resumeCta": { th: "ดูประวัติ", en: "View Resume" },
 
   "projects.title": { th: "โปรเจกต์", en: "Projects" },
   "projects.intro": {

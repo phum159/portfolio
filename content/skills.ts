@@ -29,12 +29,11 @@ export const skillGroups: SkillGroup[] = [
         name: "ESP32 / ESP32-C3",
         featured: true,
         note: {
-          th: "ใช้เป็นเกตเวย์ MQTT และเป็นตัวคุมหลักของเครื่องวัดความสูง",
-          en: "MQTT gateway in one project, main controller in the height meter",
+          th: "เกตเวย์ WiFi/MQTT และกล่องรีเลย์ที่คุมผ่าน ESP-NOW ในระบบสมาร์ตโฮม",
+          en: "WiFi/MQTT gateway and the ESP-NOW relay box in the smart home",
         },
       },
       { name: "Arduino (AVR)" },
-      { name: "Raspberry Pi" },
     ],
   },
   {
@@ -44,8 +43,6 @@ export const skillGroups: SkillGroup[] = [
       { name: "C", featured: true },
       { name: "C++", featured: true },
       { name: "Python" },
-      { name: "TypeScript / JavaScript" },
-      { name: "SQL" },
     ],
   },
   {
@@ -55,14 +52,7 @@ export const skillGroups: SkillGroup[] = [
       { name: "I2C", featured: true },
       { name: "SPI", featured: true },
       { name: "UART", featured: true },
-      {
-        name: "MQTT",
-        featured: true,
-        note: {
-          th: "ออกแบบ topic tree และ discovery payload เองทั้งหมด",
-          en: "Designed the topic tree and discovery payloads myself",
-        },
-      },
+      { name: "MQTT", featured: true },
       { name: "ESP-NOW" },
       { name: "HTTP / REST" },
     ],
@@ -72,7 +62,6 @@ export const skillGroups: SkillGroup[] = [
     title: { th: "เครื่องมือและซอฟต์แวร์", en: "Toolchain & software" },
     items: [
       { name: "STM32CubeMX / CubeIDE", featured: true },
-      { name: "PlatformIO" },
       { name: "Git" },
       { name: "Docker", featured: true },
       {
@@ -91,11 +80,7 @@ export const skillGroups: SkillGroup[] = [
     title: { th: "เครื่องมือวัดบนโต๊ะทำงาน", en: "Bench instruments" },
     items: [
       { name: "Digital multimeter" },
-      {
-        name: "Logic analyzer",
-        note: { th: "ใช้ไล่ปัญหาบัส I2C/SPI", en: "For chasing I2C/SPI bus problems" },
-      },
-      { name: "Oscilloscope" },
+      { name: "Logic analyzer" },
       { name: "Soldering / rework" },
       { name: "Breadboard prototyping" },
     ],

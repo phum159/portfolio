@@ -18,7 +18,9 @@ export default function Timeline({
             aria-hidden
             className="absolute -left-[26px] top-2 h-2 w-2 rounded-full bg-accent"
           />
-          <p className="font-mono text-xs text-muted">{pick(entry.period, locale)}</p>
+          {entry.period && (
+            <p className="font-mono text-xs text-muted">{pick(entry.period, locale)}</p>
+          )}
           <h3 className="mt-1 font-semibold tracking-tight">{pick(entry.title, locale)}</h3>
           <p className="text-sm text-muted">{pick(entry.org, locale)}</p>
           {entry.details && (
