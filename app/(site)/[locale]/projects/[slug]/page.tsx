@@ -64,6 +64,50 @@ export default async function ProjectPage({
         )}
       </dl>
 
+      {/*
+       * Awards sit above the fold on purpose: for a competition entry
+       * that result is the headline, not a footnote at the end.
+       */}
+      {project.awards && project.awards.length > 0 && (
+        <ul className="mb-10 flex flex-col gap-3">
+          {project.awards.map((award, i) => (
+            <li
+              key={i}
+              className="rounded-lg border border-line-strong bg-surface p-4"
+            >
+              <p className="font-semibold text-accent-alt">
+                {pick(award.result, locale)}
+              </p>
+              <p className="mt-1 text-sm">{pick(award.event, locale)}</p>
+              <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs text-muted">
+                <span>{award.date}</span>
+                {award.level && (
+                  <span>
+                    {t(locale, "project.awardLevel")}: {pick(award.level, locale)}
+                  </span>
+                )}
+                {award.category && (
+                  <span>
+                    {t(locale, "project.awardCategory")}:{" "}
+                    {pick(award.category, locale)}
+                  </span>
+                )}
+              </p>
+              {award.href && (
+                <a
+                  href={award.href}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="mt-2 inline-block text-sm text-accent underline underline-offset-4"
+                >
+                  {t(locale, "certificates.verify")} ↗
+                </a>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+
       {project.cover && (
         <Image
           src={project.cover}

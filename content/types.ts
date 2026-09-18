@@ -42,6 +42,29 @@ export interface GalleryItem {
 }
 
 /**
+ * A competition result earned by a project.
+ *
+ * This is for the award attached to the invention itself. The scan of the
+ * certificate belongs in `content/certificates.ts`, and a line on the CV
+ * timeline belongs in `content/resume.ts` with kind "activity" — the same
+ * win can legitimately appear in all three.
+ */
+export interface Award {
+  /** What was won, e.g. "รองชนะเลิศอันดับ 1" / "Second runner-up". */
+  result: Localized;
+  /** Competition name, e.g. "การประกวดสิ่งประดิษฐ์ของคนรุ่นใหม่". */
+  event: Localized;
+  /** How far it went: institute, regional, national, international. */
+  level?: Localized;
+  /** The category entered, when the competition has several. */
+  category?: Localized;
+  /** Display string, e.g. "2026" or "ก.พ. 2569". */
+  date: string;
+  /** Results announcement or event page, if there is one. */
+  href?: string;
+}
+
+/**
  * Adding a project = appending one of these to `content/projects.ts`.
  * Routing, the card grid, the tag filter and the detail page all derive
  * from this array — no other file needs to change.
@@ -63,6 +86,8 @@ export interface Project {
   /** Path under /public. */
   cover?: string;
   gallery?: GalleryItem[];
+  /** Competition results this project won. */
+  awards?: Award[];
   links?: LinkItem[];
   hardware?: HardwareItem[];
   /** Software side: languages, frameworks, tools. */

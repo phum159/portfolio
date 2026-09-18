@@ -43,6 +43,13 @@ export default function ProjectCard({
           </span>
         </div>
 
+        {project.awards && project.awards.length > 0 && (
+          <p className="font-mono text-xs text-accent-alt">
+            {pick(project.awards[0].result, locale)} ·{" "}
+            {pick(project.awards[0].event, locale)}
+          </p>
+        )}
+
         <p className="text-sm text-muted line-clamp-2">{pick(project.summary, locale)}</p>
 
         <ul className="mt-auto flex flex-wrap gap-1.5 pt-3 border-t border-line/40">

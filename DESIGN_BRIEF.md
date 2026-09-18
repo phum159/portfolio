@@ -119,7 +119,7 @@ All props are already typed; these are the shapes you are styling.
 |---|---|
 | `/[locale]` | In five seconds: who he is, what he builds, and a way into the projects. |
 | `/[locale]/projects` | Scannable grid, filterable by tag. |
-| `/[locale]/projects/[slug]` | The real substance: problem → architecture → challenges → outcome, plus a hardware table. This page matters most — make the hardware table and the challenge list genuinely readable. |
+| `/[locale]/projects/[slug]` | The real substance: problem → architecture → challenges → outcome, plus a hardware table. This page matters most — make the hardware table and the challenge list genuinely readable. Some projects also carry `awards` (competition results), rendered near the top in `accent-alt` because for a competition entry that is the headline. |
 | `/[locale]/skills` | Grouped bench inventory with a level per item. |
 | `/[locale]/resume` | Timeline + a prominent PDF download. |
 | `/[locale]/certificates` | Image gallery; some entries have no image yet. |

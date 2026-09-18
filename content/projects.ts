@@ -270,6 +270,13 @@ export const projects: Project[] = [
    *   stack: ["C"],
    *   hardware: [{ part: "STM32F103", role: { th: "ตัวคุมหลัก", en: "Main MCU" }, bus: "I2C" }],
    *   gallery: [{ src: "/images/my-project/1.jpg", caption: { th: "คำบรรยาย", en: "Caption" } }],
+   *   awards: [{
+   *     result: { th: "รองชนะเลิศอันดับ 1", en: "Second runner-up" },
+   *     event: { th: "ชื่อการประกวด", en: "Competition name" },
+   *     level: { th: "ระดับภาค", en: "Regional" },
+   *     category: { th: "ประเภทที่ 1 สิ่งประดิษฐ์ด้าน...", en: "Category 1: ..." },
+   *     date: "2026",
+   *   }],
    *   links: [{ label: "GitHub", href: "https://github.com/..." }],
    *   body: {
    *     problem: { th: "โจทย์คืออะไร", en: "What problem it solves." },
