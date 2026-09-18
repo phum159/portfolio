@@ -4,8 +4,8 @@ import type { Profile } from "./types";
  * Who you are. Everything marked TODO is a placeholder — replace it.
  */
 export const profile: Profile = {
-  // TODO: ใส่ชื่อจริง / real name
-  name: { th: "ภูมิ (นามสกุล)", en: "Phum (Lastname)" },
+  // TODO: เช็คสะกดอังกฤษให้ตรงกับพาสปอร์ต/เอกสารราชการ
+  name: { th: "ภัคภูมิ จันทวงค์", en: "Phakphum Chanthawong" },
 
   headline: {
     th: "วิศวกรระบบสมองกลฝังตัว",
@@ -36,8 +36,9 @@ export const profile: Profile = {
   // TODO: วางรูปไว้ที่ public/images/profile.jpg แล้วเปิดบรรทัดนี้
   // photo: "/images/profile.jpg",
 
-  // TODO: วางไฟล์ PDF ไว้ใน public/ ตามชื่อนี้
-  resume: { th: "/resume-th.pdf", en: "/resume-en.pdf" },
+  // TODO: วางไฟล์ PDF ไว้ใน public/ ตามชื่อนี้ แล้วเอาคอมเมนต์บรรทัดล่างออก
+  // ปุ่มดาวน์โหลดในหน้า Resume จะโผล่ขึ้นมาเองเมื่อบรรทัดนี้ถูกเปิดใช้งาน
+  // resume: { th: "/resume-th.pdf", en: "/resume-en.pdf" },
 
   contacts: [
     // TODO: แก้เป็นข้อมูลจริงทั้งหมด

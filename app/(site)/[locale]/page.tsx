@@ -13,7 +13,8 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const featured = featuredProjects();
   const shown = featured.length > 0 ? featured : allProjects().slice(0, 2);
 
-  const topSkills = skillGroups.flatMap((group) => group.items).filter((skill) => skill.level >= 3);
+  // Curated in content/skills.ts via `featured`, not ranked by a made-up score.
+  const topSkills = skillGroups.flatMap((group) => group.items).filter((skill) => skill.featured);
 
   return (
     <div className="space-y-16">

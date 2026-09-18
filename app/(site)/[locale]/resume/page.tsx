@@ -27,13 +27,15 @@ export default async function ResumePage({ params }: PageProps<"/[locale]/resume
     <>
       <PageHeader title={t(locale, "resume.title")} />
 
-      <a
-        href={pick(profile.resume, locale)}
-        download
-        className="mb-10 inline-block rounded bg-accent px-4 py-2 text-sm text-accent-contrast"
-      >
-        {t(locale, "resume.download")} ↓
-      </a>
+      {profile.resume && (
+        <a
+          href={pick(profile.resume, locale)}
+          download
+          className="mb-10 inline-block rounded bg-accent px-4 py-2 text-sm text-accent-contrast"
+        >
+          {t(locale, "resume.download")} ↓
+        </a>
+      )}
 
       {sections.map(
         (section) =>

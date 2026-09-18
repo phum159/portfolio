@@ -98,11 +98,6 @@ const strings = {
     th: "สิ่งที่ใช้งานจริงบนโต๊ะทำงาน ไม่ใช่แค่เคยอ่านผ่าน",
     en: "What I actually use on the bench, not just things I have read about.",
   },
-  "skills.level": { th: "ระดับ", en: "Level" },
-  "skills.level.1": { th: "เคยลอง", en: "Tried it" },
-  "skills.level.2": { th: "ใช้งานได้", en: "Working knowledge" },
-  "skills.level.3": { th: "คล่อง", en: "Comfortable" },
-  "skills.level.4": { th: "ใช้ประจำ", en: "Go-to tool" },
 
   "resume.title": { th: "ประวัติ", en: "Resume" },
   "resume.download": { th: "ดาวน์โหลด PDF", en: "Download PDF" },

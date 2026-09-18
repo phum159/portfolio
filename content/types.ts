@@ -106,14 +106,18 @@ export interface Project {
 /* Skills / lab bench                                                  */
 /* ------------------------------------------------------------------ */
 
-/** 1 = touched it, 2 = can use it, 3 = comfortable, 4 = go-to tool. */
-export type SkillLevel = 1 | 2 | 3 | 4;
-
+/**
+ * A tool, language or instrument. Deliberately no proficiency rating:
+ * a self-assigned "level" is unverifiable and invites an interviewer to
+ * argue with the number instead of reading the projects, which are the
+ * real evidence.
+ */
 export interface Skill {
   name: string;
-  level: SkillLevel;
   /** Optional one-liner, e.g. "used on the smart home gateway". */
   note?: Localized;
+  /** Show in the short list on the home page. */
+  featured?: boolean;
 }
 
 export interface SkillGroup {
@@ -176,7 +180,11 @@ export interface Profile {
   bio: Localized<string[]>;
   location: Localized;
   photo?: string;
-  /** Resume PDFs under /public, one per language. */
-  resume: Localized<string>;
+  /**
+   * Resume PDFs under /public, one per language. Leave this out until the
+   * files actually exist — the download button is only rendered when it is
+   * set, so an unset value is better than a button that 404s.
+   */
+  resume?: Localized<string>;
   contacts: ContactLink[];
 }
