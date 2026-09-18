@@ -80,7 +80,7 @@ export default async function ProjectPage({
               </p>
               <p className="mt-1 text-sm">{pick(award.event, locale)}</p>
               <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs text-muted">
-                <span>{award.date}</span>
+                <span>{pick(award.date, locale)}</span>
                 {award.level && (
                   <span>
                     {t(locale, "project.awardLevel")}: {pick(award.level, locale)}

@@ -110,6 +110,8 @@ const strings = {
   },
   "certificates.issuer": { th: "ผู้ออกให้", en: "Issued by" },
   "certificates.verify": { th: "ตรวจสอบ", en: "Verify" },
+  "certificates.enlarge": { th: "ดูภาพเต็ม", en: "View full size" },
+  "certificates.close": { th: "ปิด", en: "Close" },
   "certificates.empty": { th: "กำลังทยอยเพิ่ม", en: "Coming soon." },
 
   "about.title": { th: "เกี่ยวกับผม", en: "About me" },

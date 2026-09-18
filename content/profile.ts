@@ -40,9 +40,9 @@ export const profile: Profile = {
   // TODO: วางรูปไว้ที่ public/images/profile.jpg แล้วเปิดบรรทัดนี้
   // photo: "/images/profile.jpg",
 
-  // TODO: วางไฟล์ PDF ไว้ใน public/ ตามชื่อนี้ แล้วเอาคอมเมนต์บรรทัดล่างออก
-  // ปุ่มดาวน์โหลดในหน้า Resume จะโผล่ขึ้นมาเองเมื่อบรรทัดนี้ถูกเปิดใช้งาน
-  // resume: { th: "/resume-th.pdf", en: "/resume-en.pdf" },
+  // ⚠️ ปุ่มดาวน์โหลดเปิดอยู่ แต่ไฟล์ทั้งสองยังไม่มีจริง กดแล้วจะได้ 404
+  // จนกว่าจะวาง resume-th.pdf และ resume-en.pdf ไว้ใน public/
+  resume: { th: "/resume-th.pdf", en: "/resume-en.pdf" },
 
   contacts: [
     // TODO: แก้เป็นข้อมูลจริงทั้งหมด

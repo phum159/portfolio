@@ -58,8 +58,11 @@ export interface Award {
   level?: Localized;
   /** The category entered, when the competition has several. */
   category?: Localized;
-  /** Display string, e.g. "2026" or "ก.พ. 2569". */
-  date: string;
+  /**
+   * Display date. Localized because Thai uses the Buddhist era:
+   * { th: "11 ธันวาคม 2567", en: "11 December 2024" }.
+   */
+  date: Localized;
   /** Results announcement or event page, if there is one. */
   href?: string;
 }
@@ -153,8 +156,8 @@ export interface Certificate {
   id: string;
   title: Localized;
   issuer: Localized;
-  /** Display string, e.g. "2025" or "Mar 2025". */
-  date: string;
+  /** Display date, Localized for the same Buddhist-era reason as Award. */
+  date: Localized;
   /** Scan or photo under /public. */
   image?: string;
   /** Verification / credential URL. */

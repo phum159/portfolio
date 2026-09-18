@@ -275,7 +275,7 @@ export const projects: Project[] = [
    *     event: { th: "ชื่อการประกวด", en: "Competition name" },
    *     level: { th: "ระดับภาค", en: "Regional" },
    *     category: { th: "ประเภทที่ 1 สิ่งประดิษฐ์ด้าน...", en: "Category 1: ..." },
-   *     date: "2026",
+   *     date: { th: "11 ธันวาคม 2567", en: "11 December 2024" },
    *   }],
    *   links: [{ label: "GitHub", href: "https://github.com/..." }],
    *   body: {
