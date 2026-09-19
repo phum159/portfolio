@@ -147,7 +147,7 @@ export interface Project {
    * code rather than copy, so it is a fixed union: adding a value means
    * adding the matching component to the registry in the project page.
    */
-  demo?: "auto-lamp" | "auto-height-meter";
+  demo?: "auto-lamp" | "auto-height-meter" | "soil-nutrient-meter";
   /** Block diagram shown above the architecture write-up. */
   diagram?: Diagram;
   /** The write-up, kept as structured fields instead of a blob of HTML. */

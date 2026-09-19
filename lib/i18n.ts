@@ -94,13 +94,17 @@ const strings = {
 
   /* Interactive demo on the Auto Lamp project page. */
   "demo.title": { th: "ลองเล่นดู", en: "Try it" },
-  "demo.intro": {
+  "demo.intro.auto-lamp": {
     th: "หน้าจำลองที่ยกวิดเจ็ตมาจากแอป Blynk ของจริง กดเปิด-ปิดเอง หรือให้ไฟดับเองก็ได้ ทั้งแบบนับถอยหลังและแบบตั้งเวลาเป็นนาฬิกา",
     en: "A stand-in built from the same widgets as the real Blynk dashboard: switch the lamp by hand, or have it switch itself off — on a countdown or at a set clock time.",
   },
-  "demo.introHeight": {
+  "demo.intro.auto-height-meter": {
     th: "หน้าจำลองการใช้งานจริง เปิดเครื่องให้คาลิเบรตหาระยะพื้น เลื่อนตั้งความสูงของผู้ถูกวัด แล้วกดวัด เครื่องจะเก็บค่า 5 วินาทีแล้วเฉลี่ยขึ้นจอ",
     en: "A stand-in for using the real thing: switch on to calibrate the floor reference, set how tall the subject is, then measure — it samples for five seconds and averages the result onto the display.",
+  },
+  "demo.intro.soil-nutrient-meter": {
+    th: "ภาพจำลองการใช้งานทั้งสองส่วนของเครื่อง เพื่อให้เห็นว่าเครื่องถูกสั่งงานอย่างไรตั้งแต่ปักหัววัดจนปุ๋ยผสมเสร็จ ตัวเลขบนหน้านี้เป็นค่าสมมติสำหรับประกอบภาพ ไม่ใช่ผลวัดจากเครื่องจริง",
+    en: "A walkthrough of both halves of the machine, from the probe going in to the finished blend, so you can see how it is actually driven. The figures here are illustrative rather than readings from the real unit.",
   },
   "demo.simulation": { th: "จำลอง", en: "Simulation" },
   "demo.status": { th: "สถานะ", en: "LED" },
@@ -146,6 +150,54 @@ const strings = {
   "hm.calcFloor": { th: "ระยะถึงพื้น (คาลิเบรตตอนเปิดเครื่อง)", en: "Floor reference (calibrated at power-on)" },
   "hm.calcEcho": { th: "ระยะที่ยิงกลับมาจากศีรษะ (เฉลี่ย 10 ค่า)", en: "Echo off the head (mean of 10)" },
   "hm.error": { th: "คลาดจากความสูงจริง", en: "Off by" },
+
+  /* Interactive demo on the Soil Nutrient Analyser project page. */
+  "sm.probe": { th: "เครื่องตรวจวัดแร่ธาตุ", en: "Nutrient analyser" },
+  "sm.formula": { th: "สูตรปุ๋ยที่แนะนำ", en: "Suggested grade" },
+  "sm.formulaWhy": {
+    th: "เป็นสูตรที่หาซื้อได้ทั่วไปและให้ธาตุที่ดินแปลงนี้ขาด",
+    en: "a grade sold everywhere that carries what this plot is short of",
+  },
+  "sm.mixDone": { th: "ผสมเสร็จแล้ว ได้ปุ๋ยรวม", en: "Blended, total" },
+  "sm.mixer": { th: "เครื่องผสมปุ๋ย", en: "Fertiliser mixer" },
+  "sm.takeReading": { th: "วัดจุดนี้", en: "Read this point" },
+  "sm.noSamples": { th: "ยังไม่มีจุดที่วัด — กดวัดหลาย ๆ จุดทั่วแปลง", en: "No points yet — take readings across the plot." },
+  "sm.mean": { th: "เฉลี่ยจากทุกจุด", en: "mean of all points" },
+  "sm.clear": { th: "ล้างค่าที่วัดไว้", en: "Clear samples" },
+  "sm.mixIdle": {
+    th: "ป้อนน้ำหนักแม่ปุ๋ยแต่ละถังแล้วกดเริ่มผสม — เครื่องจริงกรอกค่านี้ให้เองจากสูตรของสถานีพัฒนาที่ดิน หรือป้อนเองที่คีย์แพดก็ได้",
+    en: "Key a weight into each hopper and start. The real machine fills these in from the Land Development Station's formula, or takes them from its keypad.",
+  },
+  "sm.crop": { th: "ชนิดพืช", en: "Crop" },
+  "sm.area": { th: "ขนาดพื้นที่", en: "Plot size" },
+  "sm.areaUnit": { th: "หน่วยพื้นที่", en: "Unit" },
+  "sm.count": { th: "จำนวนการวัด", en: "Points taken" },
+  "sm.times": { th: "ครั้ง", en: "" },
+  "sm.noLive": { th: "ยังไม่มีค่า — กดวัดจุดนี้", en: "No reading yet — take one." },
+  "sm.save": { th: "บันทึก", en: "Save point" },
+  "sm.compute": { th: "ประมวลผล", en: "Compute" },
+  "sm.planNote": {
+    th: "ค่าเป้าหมายของพืชแต่ละชนิดในหน้านี้เป็นตัวอย่างเพื่อให้เห็นภาพ ของจริงใช้สูตรที่ขอมาจากสถานีพัฒนาที่ดินร้อยเอ็ด",
+    en: "The per-crop targets here are stand-ins to show the shape of it; the real machine uses the formula from the Roi Et Land Development Station.",
+  },
+  "sm.probing": { th: "กำลังปักหัววัดลงดิน...", en: "Probe going in…" },
+  "sm.send": { th: "ส่งค่าไปเครื่องผสม", en: "Send to the mixer" },
+  "sm.awaiting": {
+    th: "รอรับค่าจากเครื่องวัด — วัดอย่างน้อยหนึ่งจุดแล้วกดส่งค่า",
+    en: "Waiting on the analyser — take at least one reading, then send.",
+  },
+  "sm.received": { th: "รับค่ามาแล้ว", en: "Received" },
+  "sm.mixFilling": {
+    th: "แม่ปุ๋ยไหลจากถังเก็บด้านบนลงถังชั่ง load cell ไต่ขึ้นจนถึงน้ำหนักที่ตั้งไว้",
+    en: "Stock is falling from the storage hoppers; the load cells climb to the weight asked for.",
+  },
+  "sm.mixDischarging": {
+    th: "ถังชั่งเปิดพร้อมกัน ปุ๋ยไหลลงถังรวมด้านล่าง ค่าบนถังชั่งลดลงจนหมด",
+    en: "The weighing hoppers open together and drain into the single bin below.",
+  },
+  "sm.startMix": { th: "เริ่มผสม", en: "Start mixing" },
+  "sm.resetMix": { th: "เริ่มใหม่", en: "Reset" },
+
   "hm.reference": {
     th: "ของจริงคลาดเฉลี่ย 0.59 ซม. เทียบเครื่องวัดมาตรฐาน",
     en: "the real unit averaged 0.59 cm against a stadiometer",

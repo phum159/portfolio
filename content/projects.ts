@@ -173,12 +173,12 @@ export const projects: Project[] = [
     },
     body: {
       problem: {
-        th: "อยากได้ระบบบ้านอัจฉริยะที่ควบคุมได้เองทั้งหมด ไม่ต้องพึ่งคลาวด์ของผู้ผลิต และเก็บข้อมูลย้อนหลังได้ โจทย์จริงคือทำอย่างไรให้ไมโครคอนโทรลเลอร์ตัวเล็กอ่านเซนเซอร์หลายตัวพร้อมกันได้นิ่ง แล้วส่งข้อมูลขึ้นระบบกลางในรูปแบบที่ Home Assistant เข้าใจ โดยไม่ต้องตั้งค่าเอนทิตีทีละตัว",
-        en: "I wanted home automation I fully control — no vendor cloud — with history I can query later. The real problem was keeping several sensors on one small MCU stable, then getting that data into Home Assistant in a shape it understands without hand-registering every entity.",
+        th: "อยากได้ระบบบ้านอัจฉริยะที่คุมได้เองทั้งหมด ไม่ต้องพึ่งคลาวด์ของผู้ผลิต และย้อนดูข้อมูลได้ โจทย์จริงคือทำให้ MCU ตัวเล็กอ่านเซนเซอร์หลายตัวได้นิ่ง แล้วส่งขึ้นระบบกลางในรูปแบบที่ Home Assistant เข้าใจโดยไม่ต้องตั้งค่าทีละตัว",
+        en: "I wanted home automation I fully control, with no vendor cloud and history I can query. The real problem was keeping several sensors stable on one small MCU, then getting that data into Home Assistant in a shape it understands without registering every entity by hand.",
       },
       architecture: {
-        th: "แบ่งหน้าที่ตามความถนัดของชิป: STM32F103 รับงานเรียลไทม์ อ่าน SHT30, BH1750 และ DS3231 ผ่าน I2C อ่านเรดาร์ LD2412 ผ่าน UART ขับจอ ST7735 ผ่าน SPI แล้วรวมค่าทั้งหมดเป็น JSON ส่งให้ ESP32 ทาง UART ส่วน ESP32 ทำหน้าที่เดียวคือเป็นเกตเวย์ WiFi/MQTT เพื่อให้แก้ปัญหาเครือข่ายได้โดยไม่กระทบโค้ดที่คุยกับฮาร์ดแวร์ กล่องรีเลย์แยกใช้ ESP32-C3 รับคำสั่งผ่าน ESP-NOW ซึ่งตอบสนองเร็วและไม่ต้องพึ่ง WiFi ฝั่งเซิร์ฟเวอร์รันเป็นชุด Docker — Home Assistant, โบรกเกอร์ Mosquitto และ PostgreSQL สำหรับเก็บประวัติ",
-        en: "Each chip does what it is good at. The STM32F103 handles the real-time side: SHT30, BH1750 and DS3231 over I2C, the LD2412 radar over UART, an ST7735 over SPI, then packs everything into JSON and hands it to the ESP32 over UART. The ESP32 does exactly one job — WiFi and MQTT — so network trouble never reaches the hardware code. A separate ESP32-C3 relay box is driven over ESP-NOW, which responds fast and does not depend on WiFi. The server side is a Docker stack: Home Assistant, a Mosquitto broker, and PostgreSQL for history.",
+        th: "แบ่งงานตามความถนัดของชิป STM32F103 รับงานเรียลไทม์ อ่านเซนเซอร์ทุกตัวแล้วแพ็กเป็น JSON ส่งให้ ESP32 ทาง UART ส่วน ESP32 ทำงานเดียวคือ WiFi/MQTT ปัญหาเครือข่ายจึงไม่กระทบโค้ดที่คุยกับฮาร์ดแวร์ กล่องรีเลย์แยกใช้ ESP32-C3 รับคำสั่งผ่าน ESP-NOW ซึ่งเร็วกว่าและไม่ต้องรอ WiFi ฝั่งเซิร์ฟเวอร์รันเป็นชุด Docker",
+        en: "Each chip does what it is good at. The STM32F103 handles the real-time side, reads every sensor and packs the values into JSON for the ESP32 over UART. The ESP32 does one job — WiFi and MQTT — so network trouble never reaches the hardware code. A separate ESP32-C3 relay box runs on ESP-NOW, and the server side is a Docker stack.",
       },
       challenges: {
         th: [
@@ -198,7 +198,7 @@ export const projects: Project[] = [
       },
       outcome: {
         th: "ระบบทำงานต่อเนื่องในห้องจริง อุณหภูมิ ความชื้น ความสว่าง และการตรวจจับคนขึ้นแดชบอร์ดแบบเรียลไทม์ ควบคุมไฟได้ทั้งจากปุ่มที่ตัวกล่องและจากมือถือ พร้อมเก็บข้อมูลย้อนหลังลงฐานข้อมูลเพื่อดูแนวโน้มได้",
-        en: "It runs continuously in a real room: temperature, humidity, lux and presence land on a live dashboard, the lamp can be driven from the physical button or from a phone, and everything is logged to a database so I can look at trends.",
+        en: "It runs continuously in a real room: temperature, humidity, lux and presence on a live dashboard, the lamp driven from either the button or a phone, and everything logged so I can look at trends.",
       },
     },
   },
@@ -343,12 +343,12 @@ export const projects: Project[] = [
     },
     body: {
       problem: {
-        th: "การวัดส่วนสูงแบบเดิมใช้ไม้วัดแล้วอ่านค่าด้วยสายตา ซึ่งคลาดเคลื่อนได้จากการกะระยะและท่าทางของผู้ถูกวัด และยิ่งช้าเมื่อต้องวัดหลายคนติดต่อกัน โจทย์คือทำเครื่องที่วัดได้เองโดยไม่ต้องมีคนคอยอ่านค่า ให้เร็วขึ้นและคลาดเคลื่อนน้อยลง เป็นโครงงานในรายวิชา ENCC0008 Engineering Innovation and Design ชั้นปีที่ 1 สถาบันวิศวกรรมศาสตร์และเทคโนโลยีอุตสาหกรรม มหาวิทยาลัยเทคโนโลยีมหานคร",
-        en: "Measuring height the usual way means reading a scale by eye, which drifts with how you judge the mark and with how the person is standing — and it gets slow once there is a queue. The task was a device that measures on its own, faster and with less error. Built for ENCC0008 Engineering Innovation and Design, first year, Faculty of Engineering and Industrial Technology, Mahanakorn University of Technology.",
+        th: "การวัดส่วนสูงด้วยไม้วัดต้องอ่านค่าด้วยสายตา ซึ่งคลาดเคลื่อนตามการกะระยะและท่าทางของผู้ถูกวัด และยิ่งช้าเมื่อต้องวัดต่อคิวกันหลายคน โจทย์คือทำเครื่องที่วัดเองได้ ให้เร็วขึ้นและแม่นขึ้น เป็นโครงงานรายวิชา ENCC0008 ชั้นปีที่ 1 มหาวิทยาลัยเทคโนโลยีมหานคร",
+        en: "Measuring height with a ruler means reading a scale by eye, which drifts with how you judge the mark and how the person stands, and it slows down once there is a queue. The task was a device that measures on its own, faster and more accurately. A first-year ENCC0008 project at Mahanakorn University of Technology.",
       },
       architecture: {
-        th: "เซนเซอร์อัลตราโซนิก HC-SR04 ติดอยู่บนคานด้านบนของโครงเสา ยิงคลื่นลงมาวัดระยะจากเซนเซอร์ถึงศีรษะ ESP32 นำระยะนั้นไปลบออกจากระยะอ้างอิงถึงพื้นที่ได้จากการคาลิเบรตตอนเปิดเครื่อง ผลต่างคือส่วนสูง แล้วส่งไปแสดงบนจอ LCD ผ่านบัส I2C โดยมีปุ่มกดสั่งเริ่มวัด และบัซเซอร์คอยบอกว่าเริ่มวัดแล้วและวัดเสร็จแล้ว ตัวโครงเป็นเสาเหล็กฉากเจาะรู ถอดประกอบและขนย้ายได้",
-        en: "An HC-SR04 on the top rail of the frame fires downward and measures the distance to the top of the head. The ESP32 subtracts that from a floor reference captured during start-up calibration; the difference is the height, which goes out to a 16×2 LCD over I2C. A push button starts a measurement and a buzzer marks start and finish. The frame is slotted angle iron, so the whole thing comes apart and can be carried.",
+        th: "HC-SR04 บนคานยิงคลื่นลงมาวัดระยะถึงศีรษะ ESP32 เอาไปลบออกจากระยะพื้นที่คาลิเบรตไว้ตอนเปิดเครื่อง ผลต่างคือส่วนสูง แล้วขึ้นจอ LCD มีปุ่มกดสั่งเริ่มวัด บัซเซอร์บอกเริ่มและจบ โครงเป็นเหล็กฉากถอดประกอบได้",
+        en: "An HC-SR04 on the top rail measures down to the head. The ESP32 subtracts that from the floor reference captured at power-on, and the difference goes to the LCD. A button starts a measurement, a buzzer marks start and finish, and the slotted-angle frame comes apart for carrying.",
       },
       challenges: {
         th: [
@@ -358,15 +358,15 @@ export const projects: Project[] = [
           "อุณหภูมิมีผลต่อความเร็วเสียง จึงมีผลต่อระยะที่คำนวณได้ รอบนี้ยังไม่ได้ชดเชย แต่ระบุไว้เป็นข้อจำกัดที่รู้ตัว ทางแก้คือเพิ่มเซนเซอร์อุณหภูมิมาปรับค่าความเร็วเสียงในสมการ",
         ],
         en: [
-          "The HC-SR04 beam was hitting the frame before it reached the person, so the reading was the structure rather than the head. Working out the beam's spread angle and repositioning the sensor kept the cone clear of the structure all the way down.",
+          "The beam was hitting the frame before it reached the person, so the reading was the structure rather than the head. Working out its spread angle and repositioning the sensor kept the cone clear all the way down.",
           "Readings occasionally came back as 0, or jumped around. Filtering fixed it: several rounds per measurement, averaged, with outliers dropped.",
           "The frame comes apart, so it never reassembles at exactly the same height or tilt. Rather than hard-coding a floor distance, the firmware re-calibrates the floor reference every time it powers on.",
-          "Temperature changes the speed of sound, and therefore the computed distance. This build does not compensate for it; it is documented as a known limitation, with a temperature sensor feeding the speed-of-sound term as the fix.",
+          "Temperature changes the speed of sound, so it changes the computed distance. This build does not compensate; it is written up as a known limitation, with a temperature sensor as the fix.",
         ],
       },
       outcome: {
-        th: "ทดสอบกับกลุ่มตัวอย่าง 10 คน เทียบกับเครื่องวัดส่วนสูงมาตรฐาน ได้ค่าคลาดเคลื่อนเฉลี่ย 0.59 เซนติเมตร คิดเป็นความผิดพลาดเฉลี่ย 0.35 เปอร์เซ็นต์ และไม่มีครั้งไหนคลาดเกิน 1 เซนติเมตร ใช้เวลาเฉลี่ย 7.72 วินาทีต่อการวัดหนึ่งครั้ง ส่วนตัวเซนเซอร์เองทดสอบที่ระยะ 10–200 เซนติเมตร มีความผิดพลาดไม่เกิน 3 เปอร์เซ็นต์ และเมื่อวัดซ้ำ 100 ครั้งได้ส่วนเบี่ยงเบนมาตรฐานต่ำกว่า 0.2 เซนติเมตรทุกระยะ ช่วงที่ใช้งานได้จริงอยู่ที่ประมาณ 50–196 เซนติเมตร",
-        en: "Against a standard stadiometer across 10 people, the mean error was 0.59 cm (0.35%), and no single reading was off by more than 1 cm. A measurement takes 7.72 seconds on average. The sensor alone, tested from 10 to 200 cm, stayed within 3% error, and 100 repeat readings at each distance held a standard deviation below 0.2 cm. Usable range in practice is roughly 50–196 cm.",
+        th: "เทียบกับเครื่องวัดส่วนสูงมาตรฐานกับกลุ่มตัวอย่าง 10 คน คลาดเคลื่อนเฉลี่ย 0.59 ซม. (0.35%) และไม่มีครั้งไหนเกิน 1 ซม. ใช้เวลาเฉลี่ย 7.72 วินาทีต่อครั้ง ตัวเซนเซอร์เองวัดซ้ำ 100 ครั้งได้ส่วนเบี่ยงเบนมาตรฐานต่ำกว่า 0.2 ซม. ช่วงใช้งานจริง 50–196 ซม.",
+        en: "Against a standard stadiometer across ten people the mean error was 0.59 cm (0.35%), and no reading was out by more than 1 cm. A measurement takes 7.72 seconds. The sensor itself held a standard deviation under 0.2 cm over 100 repeats, and the usable range is 50–196 cm.",
       },
     },
   },
@@ -378,8 +378,8 @@ export const projects: Project[] = [
       en: "Soil Nutrient Analyser and Fertiliser Mixer",
     },
     summary: {
-      th: "เครื่องสองส่วนที่ทำงานต่อกัน — หัววัดปักลงดินเพื่ออ่านค่า N-P-K แล้วคำนวณว่าพืชที่จะปลูกยังขาดปุ๋ยเท่าไหร่ จากนั้นเครื่องผสมชั่งแม่ปุ๋ยทั้งสามถังตามสูตรที่คำนวณได้ ค่าที่วัดคลาดจากผลแล็บ N 6.09% P 9.49% K 5.18% และระบบผสมปุ๋ยแม่นยำ 97.68%",
-      en: "A two-part machine: a probe is pushed into the soil to read N-P-K, works out how much fertiliser the intended crop is still short of, and a mixer then weighs out the three base fertilisers to that recipe. Against laboratory results the sensor readings were off by 6.09% (N), 9.49% (P) and 5.18% (K); the mixer dispensed to 97.68% accuracy.",
+      th: "เครื่องสองส่วนที่ทำงานต่อกัน — หัววัดปักลงดินอ่านค่า N-P-K แล้วคำนวณว่าพืชที่จะปลูกยังขาดปุ๋ยเท่าไหร่ จากนั้นเครื่องผสมชั่งแม่ปุ๋ยสามถังตามสูตรที่ได้ ค่าที่วัดคลาดจากผลแล็บ N 6.09% P 9.49% K 5.18%",
+      en: "A two-part machine: a probe reads N-P-K in the soil and works out what the crop is short of, then a mixer weighs the three base fertilisers to that recipe. Against laboratory results the readings were off by 6.09% (N), 9.49% (P) and 5.18% (K).",
     },
     year: 2025,
     featured: true,
@@ -387,49 +387,57 @@ export const projects: Project[] = [
       th: "งานทีม 8 คน ที่วิทยาลัยเทคนิคร้อยเอ็ด — ผมรับผิดชอบการติดตั้งอุปกรณ์และพัฒนาระบบซอฟต์แวร์ร่วมกับอาจารย์ที่ปรึกษา และเป็นผู้นำเสนอผลงานต่อคณะกรรมการในเวทีประกวด",
       en: "Team of eight at Roi Et Technical College — I installed the hardware and developed the software together with our advisors, and presented the work to the judging panels at the competitions.",
     },
-    tags: ["Raspberry Pi 4", "ESP32", "RS485", "NPK Sensor", "Load Cell", "Blynk", "IoT", "C/C++"],
+    tags: ["Raspberry Pi 5", "RS485", "NPK Sensor", "Load Cell", "ESP32", "Blynk", "IoT", "C/C++"],
     cover: "/images/soil-nutrient-meter/cover.webp",
     stack: ["C/C++ (Arduino IDE 2.0)", "Blynk (touchscreen UI)"],
     hardware: [
       {
-        part: "Raspberry Pi 4",
-        role: {
-          th: "คอมพิวเตอร์บอร์ดเดี่ยวของชุดหัววัด ทำหน้าที่เป็นหน้าจอผู้ใช้ รันแอป Blynk บนจอสัมผัส ไม่ได้คำนวณเอง",
-          en: "Single-board computer in the probe unit — the user interface only, running the Blynk app on the touchscreen; it does none of the computation",
-        },
-        bus: "—",
-      },
-      {
         part: "RS485 Soil NPK Sensor",
         role: {
-          th: "วัดไนโตรเจน ฟอสฟอรัส และโพแทสเซียมในดิน ช่วงวัดสูงสุด 250 mg/kg",
-          en: "Reads nitrogen, phosphorus and potassium in the soil, up to 250 mg/kg",
+          th: "หัววัดที่ปักลงดิน อ่านค่าไนโตรเจน ฟอสฟอรัส และโพแทสเซียม ช่วงวัดสูงสุด 250 mg/kg",
+          en: "The probe that goes into the ground, reading nitrogen, phosphorus and potassium, up to 250 mg/kg",
         },
         bus: "RS485",
       },
       {
-        part: "RS485 Soil pH Sensor",
+        part: "USB to RS485 Converter",
         role: {
-          th: "วัดค่าความเป็นกรด-ด่างของดิน ฝังในดินได้นานและกันน้ำ",
-          en: "Soil pH, waterproof and rated for long burial",
+          th: "แปลงสัญญาณ RS485 จากหัววัดให้เข้าพอร์ต USB ของ Raspberry Pi",
+          en: "Puts the probe's RS485 signal onto a USB port on the Raspberry Pi",
         },
-        bus: "RS485",
+        bus: "RS485 ↔ USB",
       },
       {
-        part: "LCD 5in Touchscreen 800x480",
+        part: "Raspberry Pi 5",
         role: {
-          th: "จอสัมผัสของชุดหัววัด ต่อกับ Raspberry Pi ผ่าน HDMI ใช้กดสั่งงานบนหน้าแอป Blynk",
-          en: "Touchscreen on the probe unit, connected to the Raspberry Pi over HDMI and operated through the Blynk app",
+          th: "สมองของชุดหัววัด อ่านค่าจากเซนเซอร์ คำนวณปริมาณปุ๋ยที่ต้องเติม และรันหน้าจอผู้ใช้",
+          en: "The brain of the probe unit — reads the sensor, works out how much fertiliser to add, and runs the interface",
+        },
+        bus: "USB",
+      },
+      {
+        part: "Touchscreen 7in",
+        role: {
+          th: "จอสัมผัสของชุดหัววัด เลือกชนิดพืช ป้อนขนาดพื้นที่ และอ่านผล",
+          en: "Touchscreen on the probe unit: pick the crop, enter the plot size, read the result",
         },
         bus: "HDMI",
       },
       {
+        part: "Power bank",
+        role: {
+          th: "จ่ายไฟให้ทั้งชุดหัววัด ทำให้หิ้วลงแปลงได้โดยไม่ต้องหาปลั๊ก",
+          en: "Powers the whole probe unit, so it can be carried into a field with no mains nearby",
+        },
+        bus: "USB-C",
+      },
+      {
         part: "ESP32",
         role: {
-          th: "สมองของระบบ อ่านค่าจากเซนเซอร์ คำนวณปริมาณปุ๋ยที่ต้องเติมทั้งหมด และสั่งงานเครื่องผสมผ่าน WiFi",
-          en: "The brain of the system — reads the sensors, runs every fertiliser calculation, and drives the mixer over WiFi",
+          th: "ตัวควบคุมฝั่งเครื่องผสม อ่าน load cell สั่งจ่ายแม่ปุ๋ยแต่ละถัง และรับค่าที่ส่งมาจากชุดหัววัด",
+          en: "Controller on the mixer side — reads the load cells, drives each hopper, and takes the figures sent from the probe unit",
         },
-        bus: "WiFi / BLE",
+        bus: "WiFi",
       },
       {
         part: "Load cell x3",
@@ -444,8 +452,8 @@ export const projects: Project[] = [
       {
         src: "/images/soil-nutrient-meter/probe-unit.webp",
         caption: {
-          th: "ชุดหัววัด กล่องกันน้ำพร้อมจอสัมผัส 5 นิ้วบนแกนสเตนเลส มีที่เหยียบสำหรับปักหัววัดลงดิน",
-          en: "The probe unit — a sealed enclosure with a 5-inch touchscreen on a stainless shaft, with a foot plate for pushing the probe into the ground.",
+          th: "ชุดหัววัด กล่องกันน้ำพร้อมจอสัมผัสบนแกนสเตนเลส มีที่เหยียบสำหรับปักหัววัดลงดิน",
+          en: "The probe unit — a sealed enclosure with a touchscreen on a stainless shaft, with a foot plate for pushing the probe into the ground.",
         },
       },
       {
@@ -544,35 +552,38 @@ export const projects: Project[] = [
         date: { th: "19 พฤศจิกายน 2567", en: "19 November 2024" },
       },
     ],
+    demo: "soil-nutrient-meter",
     diagram: {
       chains: [
         {
           title: { th: "ชุดหัววัด", en: "Probe unit" },
           stages: [
             {
-              title: { th: "เซนเซอร์", en: "Sensors" },
-              nodes: [
-                { label: "RS485 Soil NPK", note: { th: "ไนโตรเจน ฟอสฟอรัส โพแทสเซียม", en: "Nitrogen, phosphorus, potassium" } },
-                { label: "RS485 Soil pH", note: { th: "ความเป็นกรด-ด่าง", en: "Acidity" } },
-              ],
-            },
-            {
-              title: { th: "คำนวณ", en: "Compute" },
-              via: "RS485",
+              title: { th: "หัววัด", en: "Probe" },
               nodes: [
                 {
-                  label: "ESP32",
-                  note: { th: "เทียบสูตรกรมพัฒนาที่ดิน หาปุ๋ยที่ขาด", en: "Runs the official formula for the shortfall" },
-                  accent: "primary",
+                  label: "RS485 Soil NPK",
+                  note: { th: "ไนโตรเจน ฟอสฟอรัส โพแทสเซียม", en: "Nitrogen, phosphorus, potassium" },
                 },
               ],
             },
             {
-              title: { th: "หน้าจอผู้ใช้", en: "Front end" },
-              via: "Blynk",
+              title: { th: "ตัวแปลง", en: "Converter" },
+              via: "RS485",
               nodes: [
-                { label: "Raspberry Pi 4", note: { th: "รันแอปอย่างเดียว ไม่คำนวณ", en: "Runs the app only, no computation" } },
-                { label: 'LCD 5" Touch', note: { th: "เลือกพืช พื้นที่ อ่านผล", en: "Crop, plot size, results" } },
+                { label: "USB to RS485", note: { th: "ต่อเข้าพอร์ต USB", en: "Onto a USB port" } },
+              ],
+            },
+            {
+              title: { th: "คำนวณและแสดงผล", en: "Compute and display" },
+              via: "USB",
+              nodes: [
+                {
+                  label: "Raspberry Pi 5",
+                  note: { th: "หาปุ๋ยที่ขาด แล้วขึ้นจอทัชสกรีน 7 นิ้ว", en: "Works out the shortfall, onto a 7-inch touchscreen" },
+                  accent: "primary",
+                },
+                { label: "Power bank", note: { th: "ไฟเลี้ยงทั้งชุด", en: "Powers the unit" } },
               ],
             },
           ],
@@ -588,7 +599,8 @@ export const projects: Project[] = [
               title: { th: "ชั่ง", en: "Weigh" },
               via: "WiFi",
               nodes: [
-                { label: "Load cell ×3", note: { th: "ถังละตัว จ่ายตามน้ำหนัก", en: "One per hopper, dispensing by weight" }, accent: "primary" },
+                { label: "ESP32", note: { th: "ตัวควบคุมเครื่องผสม", en: "Mixer controller" }, accent: "primary" },
+                { label: "Load cell ×3", note: { th: "ถังละตัว จ่ายตามน้ำหนัก", en: "One per hopper, dispensing by weight" } },
               ],
             },
             {
@@ -617,34 +629,34 @@ export const projects: Project[] = [
     },
     body: {
       problem: {
-        th: "ต้นทุนก้อนใหญ่ที่สุดของชาวนาคือปุ๋ยสูตรสำเร็จ ซึ่งซื้อง่ายแต่ราคาแพง และเมื่อใส่สูตรเดิมซ้ำ ๆ โดยไม่รู้ว่าดินขาดอะไร แร่ธาตุบางตัวก็สะสมเกินจนดินเสื่อมและผลผลิตลดลง ถ้าเกษตรกรวัดแร่ธาตุในดินเองได้และผสมปุ๋ยเฉพาะตัวที่ขาด ก็จะลดต้นทุนและรักษาคุณภาพดินไปพร้อมกัน เป็นงานวิจัยของแผนกวิชาเทคโนโลยีคอมพิวเตอร์ วิทยาลัยเทคนิคร้อยเอ็ด",
-        en: "A rice farmer's largest input cost is ready-mixed fertiliser — easy to buy, expensive, and applied to the same formula year after year without knowing what the soil actually lacks, so some nutrients build up until the soil degrades and yields fall. If farmers could measure their own soil and mix only what is missing, they would cut cost and protect the soil at the same time. Built in the Computer Technology department at Roi Et Technical College.",
+        th: "ต้นทุนก้อนใหญ่ที่สุดของชาวนาคือปุ๋ยสูตรสำเร็จ ซึ่งซื้อง่ายแต่แพง และการใส่สูตรเดิมซ้ำ ๆ โดยไม่รู้ว่าดินขาดอะไร ทำให้แร่ธาตุบางตัวสะสมจนดินเสื่อม ถ้าเกษตรกรวัดดินเองแล้วผสมเฉพาะตัวที่ขาดได้ ก็ลดต้นทุนและรักษาดินไปพร้อมกัน",
+        en: "A rice farmer's biggest input cost is ready-mixed fertiliser: easy to buy, expensive, and applied to the same formula year after year without knowing what the soil lacks, so some nutrients build up until the ground degrades. Measuring the soil and mixing only what is missing cuts cost and protects it.",
       },
       architecture: {
-        th: "เครื่องมีสองส่วน ส่วนแรกคือชุดหัววัด เซนเซอร์ N-P-K และ pH แบบ RS485 บนแกนสเตนเลส การคำนวณทั้งหมดอยู่บน ESP32 ส่วน Raspberry Pi 4 กับจอสัมผัส 5 นิ้วเป็นแค่หน้าจอผู้ใช้ที่รันแอป Blynk ผู้ใช้เลือกชนิดพืชและขนาดพื้นที่ จะวัดหลายจุดแล้วให้เครื่องเฉลี่ยหรือกรอกค่าเองก็ได้ แล้ว ESP32 คำนวณว่าต้องเติม N, P และ K อีกกี่กิโลกรัม และแปลงเป็นน้ำหนักแม่ปุ๋ยที่ขายจริง เช่น ยูเรีย 46-0-0 ทริปเปิลซูเปอร์ฟอสเฟต และโพแทสเซียมคลอไรด์ ส่วนที่สองคือเครื่องผสม แม่ปุ๋ยไหลจากถังเก็บลงถังชั่งที่มี load cell ประจำถัง จ่ายตามน้ำหนักที่ส่งมา แล้วเข้าเกลียวลำเลียงผสมลงถังรับ และมีโหมด Manual ที่คีย์แพดให้ป้อนน้ำหนักทีละถัง Ch.1-Ch.3 เองได้",
-        en: "The machine is in two halves. The probe unit carries RS485 N-P-K and pH sensors on a stainless shaft; all of the computation runs on an ESP32, while the Raspberry Pi 4 and its 5-inch touchscreen are purely the front end running the Blynk app. You pick the crop and the plot size, then either take several readings and let the machine average them or type in values you already have. The ESP32 works out how many more kilograms of N, P and K the plot needs and converts that into weights of the base fertilisers sold locally — urea 46-0-0, triple superphosphate, potassium chloride. The mixer is the second half: the fertilisers fall from storage hoppers into weighing hoppers, each on its own load cell, dispense to the weights they are sent, and drop into a common auger. A manual mode on the front keypad takes a weight per hopper, Ch.1 to Ch.3, instead.",
+        th: "หัววัดอ่านค่า N-P-K ส่งผ่าน RS485 เข้า Raspberry Pi 5 ซึ่งเป็นทั้งตัวคำนวณและหน้าจอ ผู้ใช้เลือกชนิดพืชและขนาดพื้นที่บนทัชสกรีน 7 นิ้ว จะวัดหลายจุดให้เฉลี่ยหรือกรอกค่าเองก็ได้ แล้วเครื่องบอกว่าต้องเติม N, P, K กี่กิโลกรัม ทั้งชุดใช้ไฟจากแบตสำรอง หิ้วลงแปลงได้เลย ส่วนเครื่องผสมรับน้ำหนักไปชั่งจ่าย หรือป้อนเองที่คีย์แพดก็ได้",
+        en: "The probe reads N-P-K over RS485 into a Raspberry Pi 5, which is both the calculator and the screen. You pick the crop and plot size on a 7-inch touchscreen, average several points or type in values, and it says how many kilograms of N, P and K to add. A power bank runs it, so it works in a field with no mains. The mixer weighs that out, or takes weights from its own keypad.",
       },
       challenges: {
         th: [
-          "คำถามแรกคือจะรู้ได้อย่างไรว่าค่าที่เซนเซอร์อ่านได้เชื่อถือได้จริง จึงนำดินที่วัดค่าไว้แล้วไปส่งให้กลุ่มวิเคราะห์ดิน สถานีพัฒนาที่ดินร้อยเอ็ด ตรวจในห้องปฏิบัติการ แล้วเอาผลมาเทียบกัน วัดซ้ำตัวอย่างละ 5 ครั้งใน 3 ชนิดดิน ได้ความคลาดเคลื่อนรวม N 6.09% P 9.49% และ K 5.18%",
-          "คำถามที่สองคือจะรู้ได้อย่างไรว่าพืชแต่ละชนิดต้องการ N-P-K เท่าไหร่ เพราะการเดาเองไม่มีน้ำหนักพอจะเอาไปแนะนำเกษตรกร จึงขอสูตรการคำนวณปุ๋ยจากกลุ่มวิเคราะห์ดินของสถานีพัฒนาที่ดินมาใช้ แล้วเขียนเป็นฟังก์ชันแยกตามชนิดพืชในโปรแกรม",
-          "เซนเซอร์อ่านค่าไม่ได้เมื่อดินแห้งเกินไป และเกณฑ์ความชื้นขั้นต่ำยังต่างกันตามชนิดดิน จากการไล่ทดสอบที่ความชื้น 10-100% พบว่าดินเหนียวต้องมีความชื้นตั้งแต่ 50% ขึ้นไป ดินทราย 40% ขึ้นไป และดินร่วน 30% ขึ้นไป แทนที่จะปล่อยให้ผู้ใช้ไปเจอค่าเพี้ยนหน้างาน จึงเขียนขั้นตอนเตรียมตัวอย่างไว้ในคู่มือ คือสุ่มเก็บดินให้ทั่วแปลง 10-15 จุด ลึก 15 ซม. ผสมรวมเป็นตัวอย่างเดียว แล้วตวงดิน 200 มล. เติมน้ำ 100 มล. ในภาชนะ 250 มล. ก่อนปักหัววัดทุกครั้ง ความชื้นจะได้เท่ากันทุกการวัด",
+          "คำถามแรกคือจะรู้ได้ยังไงว่าค่าที่อ่านได้เชื่อถือได้ จึงส่งดินที่วัดไว้แล้วไปให้ห้องแล็บของสถานีพัฒนาที่ดินร้อยเอ็ดตรวจ แล้วเอามาเทียบกัน วัดซ้ำตัวอย่างละ 5 ครั้งใน 3 ชนิดดิน ได้ความคลาดเคลื่อนรวม N 6.09% P 9.49% K 5.18%",
+          "คำถามที่สองคือพืชแต่ละชนิดต้องการ N-P-K เท่าไหร่ การเดาเองไม่มีน้ำหนักพอจะเอาไปแนะนำเกษตรกร จึงขอสูตรคำนวณจากกลุ่มวิเคราะห์ดินมาเขียนเป็นฟังก์ชันแยกตามชนิดพืช",
+          "เซนเซอร์อ่านไม่ได้ถ้าดินแห้งเกินไป และเกณฑ์ความชื้นขั้นต่ำต่างกันตามชนิดดิน จากการไล่ทดสอบพบว่าดินเหนียวต้อง 50% ขึ้นไป ดินทราย 40% ดินร่วน 30% แทนที่จะปล่อยให้ผู้ใช้เจอค่าเพี้ยนหน้างาน จึงกำหนดขั้นตอนเตรียมตัวอย่างไว้ในคู่มือ คือตวงดิน 200 มล. เติมน้ำ 100 มล. ก่อนวัดทุกครั้ง",
           "ความคลาดเคลื่อนไม่ได้กระจายเท่ากันทุกกรณี ฟอสฟอรัสในดินทรายพลาดมากที่สุดที่ 10.46% ขณะที่ดินเหนียวพลาดเพียง 0.39-8.09% จึงระบุไว้เป็นจุดที่ต้องปรับปรุงต่อ แทนที่จะรายงานแต่ค่าเฉลี่ยรวม",
           "ระบบชั่งจ่ายปุ๋ยแม่นน้อยลงเมื่อจ่ายครั้งละน้อย ๆ ที่ 150 กรัมคลาดเคลื่อน 4.6% แต่พอเพิ่มเป็น 850 กรัมเหลือ 0% เฉลี่ยทั้งช่วงได้ 2.32% คิดเป็นประสิทธิภาพ 97.68%",
-          "ถังผสมที่ใช้เป็นพลาสติกซึ่งทนทานต่ำเมื่อเจอปุ๋ยเคมีระยะยาว และผลประเมินจากผู้ใช้ให้คะแนนความสะดวกในการเคลื่อนย้ายต่ำที่สุด ทั้งสองข้อถูกบันทึกเป็นข้อเสนอแนะสำหรับรุ่นถัดไป คือเปลี่ยนถังเป็นสแตนเลสและออกแบบให้ขนย้ายง่ายขึ้น",
+          "ถังผสมเป็นพลาสติกซึ่งทนปุ๋ยเคมีระยะยาวได้ไม่ดี และผู้ใช้ให้คะแนนความสะดวกในการเคลื่อนย้ายต่ำสุด ทั้งสองข้อบันทึกไว้เป็นข้อเสนอแนะสำหรับรุ่นถัดไป",
         ],
         en: [
-          "The first question was how we could know the sensor readings were trustworthy at all. We took soil we had already measured to the soil analysis group at the Roi Et Land Development Station for laboratory testing and compared the two. Five repeat readings per sample across three soil types gave overall errors of 6.09% for N, 9.49% for P and 5.18% for K.",
-          "The second question was how much N-P-K each crop actually needs — guessing at that carries no weight when you are advising farmers. We asked the same soil analysis group for their fertiliser calculation formulas and implemented them as per-crop functions in the program.",
-          "The sensor cannot read soil that is too dry, and the minimum moisture differs by soil type: sweeping from 10% to 100% showed clay needs 50% or above, sand 40% and loam 30%. Rather than let users discover that through wrong numbers, the manual fixes a sample preparation step — take 10 to 15 samples across the plot at 15 cm depth, combine them into one, then measure out 200 ml of soil and add 100 ml of water in a 250 ml container before the probe goes in, so every reading starts from the same moisture.",
+          "How do we know the readings are trustworthy at all? We sent soil we had already measured to the laboratory at the Roi Et Land Development Station and compared. Five repeats per sample across three soil types gave overall errors of 6.09% (N), 9.49% (P) and 5.18% (K).",
+          "Second: how much N-P-K does each crop need? Guessing carries no weight when you are advising farmers, so we asked the same group for their formula and implemented it as per-crop functions.",
+          "The sensor cannot read soil that is too dry, and the threshold differs by type: clay needs 50% moisture, sand 40%, loam 30%. Rather than let users find that out through wrong numbers, the manual fixes the preparation — 200 ml of soil to 100 ml of water before every reading.",
           "The error is not spread evenly. Phosphorus in sandy soil was the worst case at 10.46%, while clay stayed between 0.39% and 8.09%. That is recorded as the thing to fix next, instead of reporting only the overall average.",
           "The weighing side is least accurate on small batches: 4.6% off at 150 g, falling to 0% by 850 g, averaging 2.32% across the range — 97.68% efficiency.",
-          "The mixing tank is plastic, which does not hold up well to chemical fertiliser over time, and users scored portability lowest of everything. Both went into the report as recommendations for the next build: a stainless tank and a frame that is easier to move.",
+          "The mixing tank is plastic, which does not last against chemical fertiliser, and users scored portability lowest. Both went into the report as recommendations for the next build.",
         ],
       },
       outcome: {
-        th: "ผลประเมินประสิทธิภาพโดยรวมอยู่ในระดับมาก (ค่าเฉลี่ย 3.99, S.D. 0.07) โดยด้านความแม่นยำในการวัดและการผสมได้คะแนนสูงสุดที่ 4.33 การจ่ายแม่ปุ๋ยตามสูตรทำได้ครบ 100% ทั้ง N, P และ K ในทุกน้ำหนักที่ทดสอบ จากนั้นนำไปให้กลุ่มเกษตรกรผู้ปลูกข้าวบ้านโนนรัง อำเภอเมืองร้อยเอ็ด จำนวน 15 ราย ทดลองใช้จริง ได้ความพึงพอใจระดับมาก (ค่าเฉลี่ย 4.38, S.D. 0.11) ข้อที่ได้คะแนนสูงสุดคือการแสดงผลแบบทันที (4.80) และระบบใช้งานง่าย (4.60) ส่วนความสะดวกในการเคลื่อนย้ายได้คะแนนต่ำสุด (4.07) ผลงานได้รางวัลระดับจังหวัด ระดับภาค และระดับชาติรวมสี่รางวัล",
-        en: "Overall efficiency was rated high (mean 3.99, S.D. 0.07), with measurement and mixing accuracy scoring highest at 4.33. The mixer dispensed N, P and K to the specified recipe 100% of the time at every batch size tested. Fifteen rice farmers from Ban Non Rang, Mueang Roi Et, then used it in the field and rated their satisfaction high (mean 4.38, S.D. 0.11) — real-time display scored highest at 4.80 and ease of use 4.60, while portability came last at 4.07. The project won four awards, at provincial, regional and national level.",
+        th: "ผลประเมินประสิทธิภาพโดยรวมอยู่ในระดับมาก 3.99 ด้านความแม่นยำสูงสุด 4.33 และจ่ายแม่ปุ๋ยตรงตามสูตรครบ 100% ทุกน้ำหนักที่ทดสอบ จากนั้นให้เกษตรกรผู้ปลูกข้าวบ้านโนนรัง 15 ราย ใช้จริง ได้ความพึงพอใจ 4.38 สูงสุดที่การแสดงผลทันที 4.80 ต่ำสุดที่ความสะดวกในการเคลื่อนย้าย 4.07 ผลงานได้รางวัลระดับจังหวัด ภาค และชาติ รวมสี่รางวัล",
+        en: "Overall efficiency was rated high at 3.99, accuracy best at 4.33, and the mixer hit the specified recipe 100% of the time at every batch size. Fifteen rice farmers at Ban Non Rang rated it 4.38 — real-time display highest at 4.80, portability lowest at 4.07. It won four awards, from provincial to national.",
       },
     },
   },
@@ -652,14 +664,14 @@ export const projects: Project[] = [
   {
     slug: "auto-lamp",
     title: {
-      th: "โคมไฟอัตโนมัติ",
-      en: "Auto Lamp",
+      th: "PCB โคมไฟอัตโนมัติ",
+      en: "Auto Lamp Control PCB",
     },
     summary: {
-      th: "โคมไฟที่ปลายเท้าเตียง สั่งเปิด-ปิดและตั้งเวลาดับเองได้จากมือถือผ่าน Blynk ทำเองทั้งสายตั้งแต่เขียน Schematic ใน EasyEDA ต่อทดลองบนโฟโตบอร์ด เขียนเฟิร์มแวร์ ไปจนถึงวางลายและสั่งผลิตเป็นแผ่น PCB จริง",
-      en: "A lamp at the foot of the bed, switched from a phone over Blynk, with a timer so it turns itself off. Taken the whole way myself: schematic in EasyEDA, breadboard prototype, firmware, then layout and a fabricated PCB.",
+      th: "โคมไฟปลายเท้าเตียงที่สั่งจากมือถือและตั้งเวลาให้ดับเองได้ ออกแบบวงจรเองทั้งแผ่น ตั้งแต่ Schematic ใน EasyEDA จนสั่งผลิต PCB โดยมีไฟบ้านเดินอยู่บนบอร์ด",
+      en: "A lamp at the foot of the bed, switched from a phone and able to turn itself off. The board is my own design end to end — EasyEDA schematic through to a fabricated PCB, with mains running across it.",
     },
-    year: 2025,
+    year: 2026,
     role: {
       th: "ทำคนเดียวทั้งหมด — ออกแบบวงจร วางลาย PCB และเขียนเฟิร์มแวร์",
       en: "Solo project — circuit design, PCB layout, and firmware.",
@@ -873,22 +885,22 @@ export const projects: Project[] = [
     },
     body: {
       problem: {
-        th: "เวลาจะนอนผมชอบเปิดไฟดวงเล็กไว้ทางปลายเท้า แต่พอถึงเวลาจะหลับจริง ๆ ก็ขี้เกียจลุกขึ้นไปปิดเอง โจทย์เลยตรงไปตรงมา คือทำให้สั่งปิดไฟได้จากบนเตียง หรือดีกว่านั้นคือตั้งเวลาไว้แล้วให้มันดับเอง และเลือกทำวงจรเองทั้งหมดแทนที่จะซื้อปลั๊กอัจฉริยะสำเร็จรูปมาเสียบ เพราะอยากได้ประสบการณ์ออกแบบวงจรและทำ PCB จริงไปพร้อมกัน",
-        en: "I like leaving a small light on at the foot of the bed when I turn in, and then cannot be bothered to get up and switch it off once I actually want to sleep. The brief was that simple: switch it off without leaving the bed — better still, set a time and let it switch itself off. I built the circuit myself rather than buying a smart plug, because I wanted the practice of designing a board and having it made.",
+        th: "เวลาจะนอนผมชอบเปิดไฟดวงเล็กไว้ทางปลายเท้า แล้วก็ขี้เกียจลุกไปปิด โจทย์เลยง่ายมาก คือปิดไฟจากบนเตียงหรือตั้งเวลาให้ดับเอง ที่เลือกทำวงจรเองแทนการซื้อปลั๊กอัจฉริยะ เพราะอยากได้ประสบการณ์ออกแบบบอร์ดจริง",
+        en: "I like a small light on at the foot of the bed, then cannot be bothered to get up and switch it off. The brief was that simple. I built the circuit rather than buying a smart plug because I wanted the practice of designing a real board.",
       },
       architecture: {
-        th: "ตัวควบคุมคือ ESP32-C3 SuperMini รับคำสั่งจากแอป Blynk ซึ่งมีปุ่มเปิด-ปิด ไฟสถานะ ช่องตั้งเวลาแบบนาฬิกาเลือก AM/PM ตัวนับเวลาที่เหลือ และเวลาปัจจุบันของเครื่อง จุดที่ตั้งใจออกแบบคือไฟเลี้ยงมาจากโมดูล HLK-PM01 บนบอร์ดเลย ทั้งกล่องจึงใช้สายไฟเส้นเดียวไม่ต้องมีอะแดปเตอร์แยก โดยมีคาปาซิเตอร์ 100 µF กับ 0.1 µF กรองไฟเลี้ยงให้นิ่งตอนรีเลย์ดูด ทั้งวงจรเขียนเป็น Schematic ใน EasyEDA แล้ววางลายส่งผลิตเป็นแผ่น PCB",
-        en: "The controller is an ESP32-C3 SuperMini taking commands from the Blynk app, which carries an on/off button, a status light, a clock-time field with AM/PM, a readout of how long is left, and the device's current time. The deliberate part is that the HLK-PM01 sits on the board itself, so the whole enclosure runs off one cable with no separate adapter, with 100 µF and 0.1 µF capacitors holding the rail steady when the relay pulls in. The circuit was drawn in EasyEDA and laid out as a PCB.",
+        th: "ESP32-C3 SuperMini รับคำสั่งจากแอป Blynk ซึ่งมีปุ่มเปิด-ปิด ไฟสถานะ ช่องตั้งเวลาแบบนาฬิกา และตัวนับเวลาที่เหลือ จุดที่ตั้งใจออกแบบคือวางภาคจ่ายไฟ HLK-PM01 ไว้บนบอร์ดเลย ทั้งกล่องจึงใช้สายไฟเส้นเดียว ไม่ต้องมีอะแดปเตอร์แยก",
+        en: "An ESP32-C3 SuperMini takes commands from the Blynk app: on/off button, status light, a clock-time field and a countdown. The deliberate part is putting the HLK-PM01 supply on the board itself, so the enclosure runs off one cable with no separate adapter.",
       },
       challenges: {
         th: [
-          "ก่อนหน้านี้ผมต่อวงจรบนโฟโตบอร์ดอย่างเดียว งานนี้เป็นครั้งแรกที่ไล่ครบทั้งกระบวนการ ตั้งแต่เขียน Schematic ใน EasyEDA เลือกอุปกรณ์จากไลบรารีให้ตรงกับของที่หาซื้อได้จริง จับ footprint ให้ตรงกับตัวถังของจริง ไปจนถึงวางลายและส่งผลิต ซึ่งต่างจากโฟโตบอร์ดตรงที่แก้ทีหลังไม่ได้ ผิดตรงไหนคือต้องสั่งใหม่ จึงต้องตรวจให้จบตั้งแต่ก่อนส่ง",
-          "รีเลย์แต่ละรุ่นไม่ได้ทำงานที่ลอจิกเดียวกัน บางตัวดูดหน้าสัมผัสเมื่อได้ลอจิก 1 บางตัวเมื่อได้ลอจิก 0 รอบนี้ไปเดาเอาเองแล้วเสียเวลาไล่ปัญหาอยู่พักหนึ่ง บทเรียนที่ได้คือเขียนโค้ดสั้น ๆ สั่งรีเลย์สลับไปมาเพื่อยืนยันก่อนว่ามันทำงานที่ลอจิกไหน แล้วค่อยไปต่อส่วนอื่น จะได้ไม่ต้องมานั่งเดาว่าปัญหาอยู่ที่โค้ด ที่ WiFi หรือที่ฮาร์ดแวร์",
-          "เป็นบอร์ดแรกที่ผมออกแบบเองแล้วมีไฟบ้านเดินอยู่บนแผ่น จึงต้องคิดเผื่อมากกว่างานวงจรไฟต่ำ ทั้งการใส่ฟิวส์กับ MOV ไว้ต้นทาง การแยกลายฝั่งไฟบ้านออกจากฝั่งลอจิกโดยให้รีเลย์เป็นตัวคั่น และการเว้นระยะลายทองแดงฝั่งไฟบ้านให้ห่างพอ",
+          "ก่อนหน้านี้ผมต่อวงจรบนโฟโตบอร์ดอย่างเดียว งานนี้เป็นครั้งแรกที่ไล่ครบทั้งกระบวนการ ตั้งแต่เขียน Schematic เลือกอุปกรณ์ให้ตรงกับของที่หาซื้อได้ จับ footprint ให้ตรงตัวถังจริง จนวางลายส่งผลิต ต่างจากโฟโตบอร์ดตรงที่ผิดแล้วแก้ไม่ได้ ต้องตรวจให้จบก่อนส่ง",
+          "รีเลย์แต่ละรุ่นไม่ได้ทำงานที่ลอจิกเดียวกัน บางตัวดูดเมื่อได้ลอจิก 1 บางตัวเมื่อได้ 0 รอบนี้เดาเอาเองเลยเสียเวลาไล่ปัญหา บทเรียนคือเขียนโค้ดสั้น ๆ สลับรีเลย์ยืนยันก่อนว่าใช้ลอจิกไหน แล้วค่อยต่อส่วนอื่น",
+          "เป็นบอร์ดแรกที่ผมออกแบบเองแล้วมีไฟบ้านเดินอยู่บนแผ่น จึงต้องคิดเผื่อมากกว่างานไฟต่ำ ทั้งฟิวส์และ MOV ที่ต้นทาง การให้รีเลย์เป็นตัวคั่นฝั่งไฟบ้านกับฝั่งลอจิก และการเว้นระยะลายทองแดงให้พอ",
         ],
         en: [
-          "Until this project I had only ever built on breadboard. This was the first time I went through the whole flow: drawing the schematic in EasyEDA, picking library parts that match components I can actually buy, matching footprints to the real packages, then laying out the board and sending it to be made. Unlike a breadboard there is no fixing it afterwards — a mistake means ordering again — so everything has to be checked before it goes out.",
-          "Relay modules do not all switch on the same logic level: some pull in on a 1, some on a 0. I assumed rather than checked, and lost a while chasing the fault. The lesson was to write a few lines that just toggle the relay and confirm which level drives it before building anything on top, so you are never left guessing whether the problem is the code, the WiFi or the hardware.",
+          "My first time through the whole flow: schematic, picking library parts that match what I can actually buy, matching footprints to the real packages, then layout and fabrication. Unlike a breadboard there is no fixing it afterwards — a mistake means ordering again.",
+          "Relays do not all switch on the same logic level — some pull in on a 1, some on a 0. I assumed instead of checking and lost time to it. Confirm it with a few lines that just toggle the relay before building anything on top.",
           "This was the first board I designed with mains running across it, which needs more care than a low-voltage circuit: a fuse and an MOV at the inlet, the mains side kept away from the logic side with the relay as the boundary, and enough clearance around the mains traces.",
         ],
       },

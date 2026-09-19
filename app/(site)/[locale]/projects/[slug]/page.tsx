@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Section, { Chip, PageHeader } from "@/components/ui/Section";
 import Diagram from "@/components/ui/Diagram";
 import HeightMeterDemo from "@/components/ui/HeightMeterDemo";
+import SoilMeterDemo from "@/components/ui/SoilMeterDemo";
 import LampDemo from "@/components/ui/LampDemo";
 import ZoomableImage from "@/components/ui/ZoomableImage";
 import { getProject, projects } from "@/content";
@@ -134,13 +135,11 @@ export default async function ProjectPage({
       {project.demo && (
         <Section
           title={t(locale, "demo.title")}
-          intro={t(locale, project.demo === "auto-lamp" ? "demo.intro" : "demo.introHeight")}
+          intro={t(locale, `demo.intro.${project.demo}` as const)}
         >
-          {project.demo === "auto-lamp" ? (
-            <LampDemo locale={locale} />
-          ) : (
-            <HeightMeterDemo locale={locale} />
-          )}
+          {project.demo === "auto-lamp" && <LampDemo locale={locale} />}
+          {project.demo === "auto-height-meter" && <HeightMeterDemo locale={locale} />}
+          {project.demo === "soil-nutrient-meter" && <SoilMeterDemo locale={locale} />}
         </Section>
       )}
 
