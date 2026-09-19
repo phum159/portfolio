@@ -1,7 +1,8 @@
+import { site } from "@/lib/site";
 import type { Profile } from "./types";
 
 /**
- * Who you are. Everything marked TODO is a placeholder — replace it.
+ * Who you are.
  */
 export const profile: Profile = {
   name: { th: "ภัคภูมิ จันทวงค์", en: "Pakaphum Juntawong" },
@@ -22,7 +23,6 @@ export const profile: Profile = {
   },
 
   bio: {
-    // TODO: เขียนใหม่ด้วยภาษาของตัวเอง 2–3 ย่อหน้า
     th: [
       "ผมเป็นนักศึกษาสาขาวิศวกรรมคอมพิวเตอร์ที่สนใจงานระดับล่างของระบบ — การอ่านดาต้าชีต ต่อวงจรบนเบรดบอร์ด แล้วไล่ดูสัญญาณด้วยลอจิกอนาไลเซอร์จนกว่ามันจะทำงานถูก",
       "งานที่ผมชอบที่สุดคืองานที่ต้องเชื่อมโลกฮาร์ดแวร์กับซอฟต์แวร์เข้าด้วยกัน เช่นระบบสมาร์ตโฮมที่ผมทำเอง ซึ่งมีตั้งแต่เฟิร์มแวร์บน STM32 ไปจนถึงโบรกเกอร์ MQTT และฐานข้อมูลบนเซิร์ฟเวอร์",
@@ -40,14 +40,14 @@ export const profile: Profile = {
   // TODO: วางรูปไว้ที่ public/images/profile.jpg แล้วเปิดบรรทัดนี้
   // photo: "/images/profile.jpg",
 
-  // ⚠️ ปุ่มดาวน์โหลดเปิดอยู่ แต่ไฟล์ทั้งสองยังไม่มีจริง กดแล้วจะได้ 404
-  // จนกว่าจะวาง resume-th.pdf และ resume-en.pdf ไว้ใน public/
-  resume: { th: "/resume-th.pdf", en: "/resume-en.pdf" },
+  // ปิดไว้จนกว่าจะมีไฟล์จริง: ปุ่มจะถูกเรนเดอร์ก็ต่อเมื่อฟิลด์นี้ถูกตั้งค่า
+  // วาง resume-th.pdf และ resume-en.pdf ไว้ใน public/ แล้วเปิดบรรทัดล่างนี้
+  // resume: { th: "/resume-th.pdf", en: "/resume-en.pdf" },
 
   contacts: [
-    // TODO: แก้เป็นข้อมูลจริงทั้งหมด
     { id: "email", label: "6811130010@mut.ac.th", href: "mailto:6811130010@mut.ac.th" },
-    { id: "github", label: "github.com/your-github-username", href: "https://github.com/your-github-username" },
-    { id: "linkedin", label: "linkedin.com/in/your-handle", href: "https://www.linkedin.com/in/your-handle" },
+    { id: "github", label: `github.com/${site.githubUser}`, href: `https://github.com/${site.githubUser}` },
+    // เพิ่ม LinkedIn ตรงนี้เมื่อมีโปรไฟล์จริง — ลิงก์ที่กดไม่ได้แย่กว่าไม่มีลิงก์
+    // { id: "linkedin", label: "linkedin.com/in/...", href: "https://www.linkedin.com/in/..." },
   ],
 };
