@@ -20,7 +20,7 @@ export const certificates: Certificate[] = [
       en: "Agoda",
     },
     date: { th: "17 กรกฎาคม 2569", en: "17 July 2026" },
-    image: "/images/certs/agoda-tech-camp-day.jpg",
+    image: "/images/certs/agoda-tech-camp-day.webp",
   },
   {
     id: "ovec-innovation-award-2025-silver",
@@ -33,7 +33,7 @@ export const certificates: Certificate[] = [
       en: "Office of the Vocational Education Commission, with NRCT and TSRI — OVEC Innovation Award 2025",
     },
     date: { th: "23 มกราคม 2568", en: "23 January 2025" },
-    image: "/images/certs/ovec-innovation-silver.jpg",
+    image: "/images/certs/ovec-innovation-silver.webp",
   },
   {
     id: "vec-35-regional-gold-runner-up",
@@ -86,7 +86,7 @@ export const certificates: Certificate[] = [
       en: "Rajamangala University of Technology Isan, Khon Kaen Campus — Northeastern regional round",
     },
     date: { th: "4 กรกฎาคม 2567", en: "4 July 2024" },
-    image: "/images/certs/rmuti-digital-circuit-bronze.jpg",
+    image: "/images/certs/rmuti-digital-circuit-bronze.webp",
   },
 
   /* ------------------------------------------------------------------
