@@ -34,6 +34,25 @@ export async function generateMetadata({
       canonical: `/${locale}`,
       languages: Object.fromEntries(locales.map((l) => [l, `/${l}`])),
     },
+    /*
+     * Without these, pasting the link into LinkedIn, Facebook or Line
+     * shows a bare URL. A portfolio exists to be shared, so it gets a card.
+     */
+    openGraph: {
+      type: "website",
+      url: `/${locale}`,
+      siteName: pick(profile.name, locale),
+      title: `${pick(profile.name, locale)} — ${pick(profile.headline, locale)}`,
+      description: pick(profile.tagline, locale),
+      locale: locale === "th" ? "th_TH" : "en_US",
+      images: [{ url: "/og.png", width: 1200, height: 630, alt: pick(profile.name, locale) }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${pick(profile.name, locale)} — ${pick(profile.headline, locale)}`,
+      description: pick(profile.tagline, locale),
+      images: ["/og.png"],
+    },
   };
 }
 
