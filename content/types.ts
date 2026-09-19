@@ -67,6 +67,53 @@ export interface Award {
   href?: string;
 }
 
+/* ------------------------------------------------------------------ */
+/* Architecture diagrams                                               */
+/* ------------------------------------------------------------------ */
+
+/**
+ * One box. `label` is the part or product name and stays untranslated —
+ * "STM32F103C8T6" reads the same in both languages.
+ */
+export interface DiagramNode {
+  label: string;
+  /** A few words on what it does here. Keep it to one line. */
+  note?: Localized;
+  /**
+   * Emphasis. "primary" is the thing doing the work (the MCU, the server);
+   * "output" is what the build ultimately drives. Everything else is plain
+   * so the two that matter actually stand out.
+   */
+  accent?: "primary" | "output";
+}
+
+/**
+ * A column. Boxes in the same stage are peers — four sensors feeding one
+ * MCU is one stage of four nodes, not four stages.
+ */
+export interface DiagramStage {
+  /** Caption above the column, e.g. "เซนเซอร์" / "Sensors". */
+  title?: Localized;
+  /**
+   * Label on the arrow coming INTO this stage: "I2C", "UART", "MQTT".
+   * Ignored on the first stage of a chain, which has nothing before it.
+   */
+  via?: string;
+  nodes: DiagramNode[];
+}
+
+/** One left-to-right flow. A project can have more than one. */
+export interface DiagramChain {
+  title?: Localized;
+  stages: DiagramStage[];
+}
+
+export interface Diagram {
+  chains: DiagramChain[];
+  /** Things a box-and-arrow picture cannot show, e.g. why a resistor is there. */
+  notes?: Localized<string[]>;
+}
+
 /**
  * Adding a project = appending one of these to `content/projects.ts`.
  * Routing, the card grid, the tag filter and the detail page all derive
@@ -95,6 +142,14 @@ export interface Project {
   hardware?: HardwareItem[];
   /** Software side: languages, frameworks, tools. */
   stack?: string[];
+  /**
+   * Opt in to an interactive demo rendered on the project page. This is
+   * code rather than copy, so it is a fixed union: adding a value means
+   * adding the matching component to the registry in the project page.
+   */
+  demo?: "auto-lamp" | "auto-height-meter";
+  /** Block diagram shown above the architecture write-up. */
+  diagram?: Diagram;
   /** The write-up, kept as structured fields instead of a blob of HTML. */
   body: {
     problem: Localized;
