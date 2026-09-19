@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Section, { Chip, PageHeader } from "@/components/ui/Section";
+import Diagram from "@/components/ui/Diagram";
+import HeightMeterDemo from "@/components/ui/HeightMeterDemo";
+import LampDemo from "@/components/ui/LampDemo";
+import ZoomableImage from "@/components/ui/ZoomableImage";
 import { getProject, projects } from "@/content";
 import { isLocale, localePath, locales, pick, t } from "@/lib/i18n";
 
@@ -109,27 +112,46 @@ export default async function ProjectPage({
       )}
 
       {project.cover && (
-        <Image
+        <ZoomableImage
           src={project.cover}
-          alt=""
+          alt={pick(project.title, locale)}
           width={1600}
           height={900}
+          locale={locale}
+          wrapperClassName="mb-10"
           /* Photos come in both orientations, so bound the height and let
              the width follow rather than forcing a fixed aspect ratio --
              a portrait shot in a 16:9 box is either a sliver or a tower. */
-          className="mx-auto mb-10 max-h-[30rem] w-auto max-w-full rounded-lg border border-line"
+          className="max-h-[30rem] w-auto max-w-full rounded-lg border border-line"
           priority
         />
       )}
 
+      {/*
+       * Interactive demos are code, so they live in a registry here rather
+       * than in content/. A project opts in with `demo` in projects.ts.
+       */}
+      {project.demo && (
+        <Section
+          title={t(locale, "demo.title")}
+          intro={t(locale, project.demo === "auto-lamp" ? "demo.intro" : "demo.introHeight")}
+        >
+          {project.demo === "auto-lamp" ? (
+            <LampDemo locale={locale} />
+          ) : (
+            <HeightMeterDemo locale={locale} />
+          )}
+        </Section>
+      )}
+
       <Prose title={t(locale, "project.problem")} text={pick(project.body.problem, locale)} />
-      <Prose
-        title={t(locale, "project.architecture")}
-        text={pick(project.body.architecture, locale)}
-      />
+      <Section title={t(locale, "project.architecture")}>
+        {project.diagram && <Diagram data={project.diagram} locale={locale} />}
+        <p className="leading-relaxed">{pick(project.body.architecture, locale)}</p>
+      </Section>
 
       <Section title={t(locale, "project.challenges")}>
-        <ul className="flex list-disc flex-col gap-2 pl-5">
+        <ul className="flex list-disc flex-col gap-2 pl-5 leading-relaxed">
           {pick(project.body.challenges, locale).map((item, i) => (
             <li key={i}>{item}</li>
           ))}
@@ -182,12 +204,13 @@ export default async function ProjectPage({
           <div className="grid gap-4 sm:grid-cols-2">
             {project.gallery.map((shot) => (
               <figure key={shot.src}>
-                <Image
+                <ZoomableImage
                   src={shot.src}
                   alt={shot.caption ? pick(shot.caption, locale) : ""}
                   width={800}
                   height={600}
-                  className="mx-auto max-h-96 w-auto max-w-full rounded-lg border border-line"
+                  locale={locale}
+                  className="max-h-96 w-auto max-w-full rounded-lg border border-line"
                 />
                 {shot.caption && (
                   <figcaption className="mt-2 text-xs text-muted">
@@ -225,7 +248,7 @@ export default async function ProjectPage({
 function Prose({ title, text }: { title: string; text: string }) {
   return (
     <Section title={title}>
-      <p className="max-w-2xl leading-relaxed">{text}</p>
+      <p className="leading-relaxed">{text}</p>
     </Section>
   );
 }

@@ -22,7 +22,7 @@ export default function Section({
         <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
         {action}
       </div>
-      {intro && <p className="mb-6 max-w-2xl text-muted">{intro}</p>}
+      {intro && <p className="mb-6 text-muted">{intro}</p>}
       {children}
     </section>
   );
@@ -33,7 +33,7 @@ export function PageHeader({ title, intro }: { title: string; intro?: string }) 
   return (
     <header className="mb-10">
       <h1 className="text-3xl font-semibold tracking-tight">{title}</h1>
-      {intro && <p className="mt-3 max-w-2xl text-muted">{intro}</p>}
+      {intro && <p className="mt-3 text-muted">{intro}</p>}
     </header>
   );
 }

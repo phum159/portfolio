@@ -7,10 +7,18 @@ import { Chip } from "./Section";
 export default function ProjectCard({
   project,
   locale,
+  headingLevel = 3,
 }: {
   project: Project;
   locale: Locale;
+  /**
+   * 3 under a Section heading (the home page), 2 when the cards are the
+   * first thing below the page title (/projects). Skipping a level is a
+   * screen-reader problem, not a styling one, so it is not a class.
+   */
+  headingLevel?: 2 | 3;
 }) {
+  const Heading = `h${headingLevel}` as "h2" | "h3";
   const href = localePath(locale, `/projects/${project.slug}`);
 
   return (
@@ -33,11 +41,11 @@ export default function ProjectCard({
 
       <div className="flex flex-1 flex-col gap-3 p-5">
         <div className="flex items-baseline justify-between gap-3">
-          <h3 className="font-semibold tracking-tight text-lg">
+          <Heading className="font-semibold tracking-tight text-lg">
             <Link href={href} className="hover:text-accent transition-colors">
               {pick(project.title, locale)}
             </Link>
-          </h3>
+          </Heading>
           <span className="font-mono text-xs text-muted bg-background border border-line px-2 py-0.5 rounded">
             {project.year}
           </span>

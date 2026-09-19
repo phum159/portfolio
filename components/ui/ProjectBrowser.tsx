@@ -52,7 +52,7 @@ export default function ProjectBrowser({
       ) : (
         <div className="grid gap-5 sm:grid-cols-2">
           {visible.map((project) => (
-            <ProjectCard key={project.slug} project={project} locale={locale} />
+            <ProjectCard key={project.slug} project={project} locale={locale} headingLevel={2} />
           ))}
         </div>
       )}
