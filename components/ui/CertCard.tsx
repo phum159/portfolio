@@ -23,7 +23,7 @@ export default function CertCard({
           <button
             type="button"
             onClick={() => setOpen(true)}
-            aria-label={`${title} — ${t(locale, "certificates.enlarge")}`}
+            aria-label={`${title} — ${t(locale, "image.enlarge")}`}
             className="group relative bg-background"
           >
             <Image
@@ -36,7 +36,7 @@ export default function CertCard({
               className="h-52 w-full object-contain p-2"
             />
             <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-background/70 font-mono text-xs text-accent opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
-              {t(locale, "certificates.enlarge")}
+              {t(locale, "image.enlarge")}
             </span>
           </button>
 
@@ -44,7 +44,7 @@ export default function CertCard({
             <Lightbox
               src={cert.image}
               alt={title}
-              closeLabel={t(locale, "certificates.close")}
+              closeLabel={t(locale, "image.close")}
               onClose={() => setOpen(false)}
             />
           )}
