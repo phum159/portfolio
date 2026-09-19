@@ -49,8 +49,8 @@ export const profile: Profile = {
     { id: "github", label: `github.com/${site.githubUser}`, href: `https://github.com/${site.githubUser}` },
     {
       id: "linkedin",
-      label: "linkedin.com/in/ภัคภูมิ-จันทวงค์-683902438",
-      href: "https://www.linkedin.com/in/%E0%B8%A0%E0%B8%B1%E0%B8%84%E0%B8%A0%E0%B8%B9%E0%B8%A1%E0%B8%B4-%E0%B8%88%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%A7%E0%B8%87%E0%B8%84%E0%B9%8C-683902438",
+      label: "linkedin.com/in/pakaphum-juntawong",
+      href: "https://www.linkedin.com/in/pakaphum-juntawong",
     },
   ],
 };
