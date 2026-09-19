@@ -45,9 +45,12 @@ export const profile: Profile = {
   // resume: { th: "/resume-th.pdf", en: "/resume-en.pdf" },
 
   contacts: [
-    { id: "email", label: "6811130010@mut.ac.th", href: "mailto:6811130010@mut.ac.th" },
+    { id: "email", label: "pakaphum1080@gmail.com", href: "mailto:pakaphum1080@gmail.com" },
     { id: "github", label: `github.com/${site.githubUser}`, href: `https://github.com/${site.githubUser}` },
-    // เพิ่ม LinkedIn ตรงนี้เมื่อมีโปรไฟล์จริง — ลิงก์ที่กดไม่ได้แย่กว่าไม่มีลิงก์
-    // { id: "linkedin", label: "linkedin.com/in/...", href: "https://www.linkedin.com/in/..." },
+    {
+      id: "linkedin",
+      label: "linkedin.com/in/ภัคภูมิ-จันทวงค์-683902438",
+      href: "https://www.linkedin.com/in/%E0%B8%A0%E0%B8%B1%E0%B8%84%E0%B8%A0%E0%B8%B9%E0%B8%A1%E0%B8%B4-%E0%B8%88%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%A7%E0%B8%87%E0%B8%84%E0%B9%8C-683902438",
+    },
   ],
 };
