@@ -60,6 +60,33 @@ export const resumeEntries: ResumeEntry[] = [
     },
   },
 
+  {
+    kind: "activity",
+    period: { th: "2567 – 2568", en: "2024 – 2025" },
+    title: {
+      th: "การประกวดสิ่งประดิษฐ์ — เครื่องตรวจวัดแร่ธาตุและผสมปุ๋ยในดิน",
+      en: "Invention competitions — Soil Nutrient Analyser and Fertiliser Mixer",
+    },
+    org: {
+      th: "สำนักงานคณะกรรมการการอาชีวศึกษา",
+      en: "Office of the Vocational Education Commission",
+    },
+    details: {
+      th: [
+        "ชนะเลิศ เหรียญทอง ระดับอาชีวศึกษาจังหวัดร้อยเอ็ด (19 พฤศจิกายน 2567)",
+        "รองชนะเลิศอันดับ 1 เหรียญทอง และ Honor Awards เหรียญทอง ระดับภาคตะวันออกเฉียงเหนือ (11 ธันวาคม 2567)",
+        "เหรียญเงิน ระดับชาติ OVEC Innovation Award 2025 (23 มกราคม 2568)",
+        "รับผิดชอบการติดตั้งอุปกรณ์ พัฒนาซอฟต์แวร์ และนำเสนอผลงานต่อคณะกรรมการ",
+      ],
+      en: [
+        "First place, gold medal, Roi Et provincial round (19 November 2024)",
+        "First runner-up gold medal and an Honor Award gold medal, Northeastern regional round (11 December 2024)",
+        "Silver medal, national OVEC Innovation Award 2025 (23 January 2025)",
+        "Installed the hardware, developed the software, and presented the work to the judges",
+      ],
+    },
+  },
+
   /* ------------------------------------------------------------------
    * เอาคอมเมนต์ออกแล้วกรอกข้อมูล เมื่อมีประสบการณ์ทำงานหรือฝึกงาน
    *
