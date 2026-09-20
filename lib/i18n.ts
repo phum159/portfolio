@@ -99,8 +99,8 @@ const strings = {
     en: "A stand-in built from the same widgets as the real Blynk dashboard: switch the lamp by hand, or have it switch itself off — on a countdown or at a set clock time.",
   },
   "demo.intro.auto-height-meter": {
-    th: "หน้าจำลองการใช้งานจริง เปิดเครื่องให้คาลิเบรตหาระยะพื้น เลื่อนตั้งความสูงของผู้ถูกวัด แล้วกดวัด เครื่องจะเก็บค่า 5 วินาทีแล้วเฉลี่ยขึ้นจอ",
-    en: "A stand-in for using the real thing: switch on to calibrate the floor reference, set how tall the subject is, then measure — it samples for five seconds and averages the result onto the display.",
+    th: "หน้าจำลองการใช้งานจริง เปิดเครื่องให้คาลิเบรตหาระยะพื้น เลื่อนตั้งความสูงของผู้ถูกวัด แล้วกดวัด เครื่องจะเก็บค่า 3 วินาทีแล้วเฉลี่ยขึ้นจอ",
+    en: "A stand-in for using the real thing: switch on to calibrate the floor reference, set how tall the subject is, then measure — it samples for three seconds and averages the result onto the display.",
   },
   "demo.intro.soil-nutrient-meter": {
     th: "ภาพจำลองการใช้งานทั้งสองส่วนของเครื่อง เพื่อให้เห็นว่าเครื่องถูกสั่งงานอย่างไรตั้งแต่ปักหัววัดจนปุ๋ยผสมเสร็จ ตัวเลขบนหน้านี้เป็นค่าสมมติสำหรับประกอบภาพ ไม่ใช่ผลวัดจากเครื่องจริง",

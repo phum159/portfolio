@@ -211,8 +211,8 @@ export const projects: Project[] = [
       en: "Automatic Digital Height Meter",
     },
     summary: {
-      th: "เครื่องวัดส่วนสูงอัตโนมัติด้วยคลื่นอัลตราโซนิกและ ESP32 แทนการวัดด้วยไม้วัดที่ต้องอ่านค่าด้วยสายตา วัดเสร็จในเวลาเฉลี่ย 7.7 วินาที คลาดเคลื่อนเฉลี่ย 0.59 เซนติเมตร",
-      en: "An ultrasonic height meter built on an ESP32, replacing a ruler that someone has to read by eye. A measurement takes 7.7 seconds on average, with a mean error of 0.59 cm.",
+      th: "เครื่องวัดส่วนสูงอัตโนมัติด้วยคลื่นอัลตราโซนิกและ ESP32 แทนการวัดด้วยไม้วัดที่ต้องอ่านค่าด้วยสายตา กดครั้งเดียวได้ผลในราว 7 วินาที คลาดเคลื่อนเฉลี่ย 0.59 เซนติเมตร",
+      en: "An ultrasonic height meter built on an ESP32, replacing a ruler that someone has to read by eye. One press gives a reading in about 7 seconds, with a mean error of 0.59 cm.",
     },
     year: 2025,
     role: {
@@ -296,6 +296,9 @@ export const projects: Project[] = [
         },
       },
     ],
+    links: [
+      { label: "GitHub", href: "https://github.com/phum159/auto-height-meter" },
+    ],
     demo: "auto-height-meter",
     diagram: {
       chains: [
@@ -365,8 +368,8 @@ export const projects: Project[] = [
         ],
       },
       outcome: {
-        th: "เทียบกับเครื่องวัดส่วนสูงมาตรฐานกับกลุ่มตัวอย่าง 10 คน คลาดเคลื่อนเฉลี่ย 0.59 ซม. (0.35%) และไม่มีครั้งไหนเกิน 1 ซม. ใช้เวลาเฉลี่ย 7.72 วินาทีต่อครั้ง ตัวเซนเซอร์เองวัดซ้ำ 100 ครั้งได้ส่วนเบี่ยงเบนมาตรฐานต่ำกว่า 0.2 ซม. ช่วงใช้งานจริง 50–196 ซม.",
-        en: "Against a standard stadiometer across ten people the mean error was 0.59 cm (0.35%), and no reading was out by more than 1 cm. A measurement takes 7.72 seconds. The sensor itself held a standard deviation under 0.2 cm over 100 repeats, and the usable range is 50–196 cm.",
+        th: "เทียบกับเครื่องวัดส่วนสูงมาตรฐานกับกลุ่มตัวอย่าง 10 คน คลาดเคลื่อนเฉลี่ย 0.59 ซม. (0.35%) และไม่มีครั้งไหนเกิน 1 ซม. ตัวเซนเซอร์เองวัดซ้ำ 100 ครั้งได้ส่วนเบี่ยงเบนมาตรฐานต่ำกว่า 0.2 ซม. หนึ่งครั้งที่กดวัดใช้เวลาราว 7 วินาที แบ่งเป็นนับถอยหลัง 3 วินาทีและเก็บค่า 3 วินาที เครื่องวัดได้ตั้งแต่ 50 ซม. ขึ้นไป ต่ำกว่านั้นจะรายงานว่าไม่พบคน ส่วนเพดานถูกจำกัดด้วยระยะต่ำสุดที่เซนเซอร์ยังอ่านได้ เพราะคานอยู่สูงราว 198 ซม. คนที่สูงมากจะเหลือช่องว่างถึงเซนเซอร์เพียงไม่กี่เซนติเมตร",
+        en: "Against a standard stadiometer across ten people the mean error was 0.59 cm (0.35%), and no reading was out by more than 1 cm. The sensor itself held a standard deviation under 0.2 cm over 100 repeats. One press takes about 7 seconds — a 3 second countdown and 3 seconds of readings. It measures from 50 cm up, reporting nobody there below that, and the ceiling is set by how close the sensor can still read: the rail sits at around 198 cm, so a very tall person leaves only a few centimetres of air.",
       },
     },
   },

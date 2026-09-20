@@ -6,13 +6,18 @@ import { t, type Locale } from "@/lib/i18n";
 type Phase = "off" | "calibrating" | "ready" | "measuring" | "done";
 
 /** Frame geometry, in centimetres, matching the real rig. */
-const RAIL_CM = 200;
-/** Usable range the real unit was characterised over. */
+const RAIL_CM = 198.5;
+/**
+ * Usable range. The floor is DETECT_THRESHOLD in the firmware: anything
+ * shorter reads as nobody standing there. The ceiling is not the rail — the
+ * sensor stops reading reliably a few centimetres below it.
+ */
 const MIN_CM = 50;
-const MAX_CM = 196;
+const MAX_CM = 190;
 
 const CALIB_MS = 1600;
-const MEASURE_MS = 5000;
+/** The firmware samples for three seconds per press. */
+const MEASURE_MS = 3000;
 const SAMPLES = 10;
 
 /* Drawing space. The floor sits at FLOOR_Y and the rail at RAIL_Y, so one
